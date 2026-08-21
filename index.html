@@ -8,7 +8,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
-  <!-- Uwaga: Czcionka Amoria jest załadowana stylami zastępczymi/seraph dla efektu wysokiej elegancji nagłówków -->
 
   <style>
     :root {
@@ -84,7 +83,7 @@
     header {
       position: fixed;
       top: 0; left: 0; width: 100%;
-      padding: 1rem 2rem;
+      padding: 1.5rem 2rem;
       display: flex;
       flex-direction: row;
       justify-content: space-between;
@@ -179,10 +178,10 @@
       box-shadow: 0 0 25px var(--accent-neon);
     }
 
-    /* GŁÓWNY KONTENER */
+    /* GŁÓWNY KONTENER – szerokość 1100px */
     main {
-      padding-top: 7rem;
-      max-width: 1300px;
+      padding-top: 8rem;
+      max-width: 1100px;
       margin: 0 auto;
       padding-left: 1.5rem;
       padding-right: 1.5rem;
@@ -270,7 +269,7 @@
       margin-bottom: 4rem;
       background: rgba(15, 20, 30, 0.6);
       border: 1px solid var(--glass-border);
-      padding: 2rem;
+      padding: 2.5rem;
       clip-path: var(--card-clip);
       backdrop-filter: blur(12px);
     }
@@ -290,16 +289,17 @@
     .about-text h2 {
       font-family: var(--font-title);
       font-size: 2rem;
-      margin-bottom: 1rem;
+      margin-bottom: 1.2rem;
       text-transform: uppercase;
       letter-spacing: 1px;
     }
 
+    /* ZWIĘKSZONY ROZMIAR I INTERLIA W SEKCJI O MNIE */
     .about-text p {
-      color: #909bb0;
-      line-height: 1.6;
-      margin-bottom: 1rem;
-      font-size: 0.95rem;
+      color: #9da8be;
+      line-height: 1.8;
+      margin-bottom: 1.2rem;
+      font-size: 1.05rem;
       font-weight: 300;
     }
 
@@ -325,6 +325,7 @@
       padding: 1.5rem;
       backdrop-filter: blur(10px);
       transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
     }
 
     .card-item:hover {
@@ -369,6 +370,7 @@
       overflow: hidden;
       border: 1px solid var(--glass-border);
       background: #000;
+      cursor: pointer;
     }
 
     .art-img-container img {
@@ -566,6 +568,32 @@
       border: 1px solid var(--glass-border);
     }
 
+    /* LIGHTBOX CSS */
+    .lightbox {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.9);
+      z-index: 99999;
+      justify-content: center;
+      align-items: center;
+      cursor: zoom-out;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      backdrop-filter: blur(5px);
+    }
+    .lightbox.show {
+      display: flex;
+      opacity: 1;
+    }
+    .lightbox img {
+      max-width: 90vw;
+      max-height: 90vh;
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 0 40px rgba(0,0,0,0.7);
+      border-radius: 4px;
+    }
+
     footer {
       margin-top: 5rem;
       padding: 2.5rem 1rem;
@@ -578,29 +606,9 @@
       font-weight: 300;
     }
 
-    /* OPTYMALIZACJA DLA WYSOKICH ROZDZIELCZOŚCI (2K, 4K, UltraWide) */
-    @media (min-width: 1500px) {
-      main {
-        max-width: 1550px;
-      }
-    }
-
-    @media (min-width: 1900px) {
-      main {
-        max-width: 72vw;
-      }
-      body {
-        font-size: 1.15rem;
-      }
-      .grid-3 {
-        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-        gap: 3rem;
-      }
-    }
-
     @media (max-width: 768px) {
       header {
-        padding: 0.8rem 1rem;
+        padding: 1.2rem 1rem;
         flex-wrap: wrap;
         justify-content: center;
         gap: 0.6rem;
@@ -608,7 +616,7 @@
       .brand { align-items: center; }
       .switcher-box { order: 3; width: 100%; justify-content: center; }
       .tab-btn { flex: 1; text-align: center; padding: 0.5rem; }
-      main { padding-top: 9.5rem; }
+      main { padding-top: 10.5rem; }
       .hero, .about-section { grid-template-columns: 1fr; padding: 1.2rem; gap: 1.5rem; }
       .hero-title { font-size: 2.3rem; }
       #cookie-banner { left: 10px; right: 10px; bottom: 10px; }
@@ -662,8 +670,9 @@
         </div>
         <div class="about-text">
           <h2>O mnie</h2>
-          <p>Tworzę tatuaże, które opowiadają historie i stają się integralną częścią Twojej skóry. Każdy projekt traktuję w sposób indywidualny, dbając o najwyższą precyzję wykonania i unikalny styl.</p>
-          <p>Pracuję w przyjaznej atmosferze kameralnego studia w Katowicach. Jeśli szukasz czegoś nietuzinkowego, jesteś w idealnym miejscu.</p>
+          <p>Cześć, z tej strony Rydz!</p>
+          <p>Jestem tatuatorką z Katowic i zamieniam codzienność w kolorowe dziarki. Jeżeli szukasz osoby, z którą można pogadać o wszystkim albo pomilczeć w komfortowej atmosferze - to właśnie ją znalazłeś. Przede wszystkim dbam o komfort swoich klientów, więc nie obawiaj się zadawać pytań. Jestem po to, żeby na nie odpowiedzieć i rozwiać Twoje wątpliwości.</p>
+          <p>No dobra, ale jakie tatuaże właściwie wykonuję?<br>Najbardziej kocham kolorowe dziarki i to właśnie ich wykonuję najwięcej. Ale nie samym kolorem człowiek żyje - równie chętnie tworzę też czarne tatuaże, abstrakcje czy napisy. Zjedź niżej, żeby zobaczyć moje realizacje i sprawdź, w jakim klimacie mogłabym stworzyć coś dla Ciebie.</p>
         </div>
       </section>
 
@@ -679,16 +688,16 @@
         </ul>
       </section>
 
-      <h2 style="font-family: var(--font-title); font-size: 1.8rem; margin-bottom: 1.5rem; letter-spacing: 1px;">Przykładowe Realizacje</h2>
+      <h2 style="font-family: var(--font-title); font-size: 1.8rem; margin-bottom: 1.5rem; letter-spacing: 1px;">Przykładowe Realizacje <span style="font-size: 0.9rem; color: #8b95a5; font-family: var(--font-body); font-weight: 300; letter-spacing: 0;">(kliknij, aby powiększyć)</span></h2>
       
       <div class="grid-3">
-        <div class="card-item"><img src="fddd8b45-fa11-4fa2-88ed-393dd84bed07.jpg" alt="Tatuaż" class="card-img"></div>
-        <div class="card-item"><img src="4290f03b-3eaa-4124-94a1-1c18c924238d.jpg" alt="Tatuaż" class="card-img"></div>
-        <div class="card-item"><img src="4306c7da-94ad-46a7-a31d-d7ad55b9233b.jpg" alt="Tatuaż" class="card-img"></div>
-        <div class="card-item"><img src="7e62d13c-8061-4f51-be68-3a68561917cc.jpg" alt="Tatuaż" class="card-img"></div>
-        <div class="card-item"><img src="f5b34410-a848-44a9-8b67-fe12ebb4f0a9.jpg" alt="Tatuaż" class="card-img"></div>
-        <div class="card-item"><img src="2fa26575-0428-477a-9768-00f8b2b7f5ce.jpg" alt="Tatuaż" class="card-img"></div>
-        <div class="card-item"><img src="e3b36eba-fb72-4be3-a0b2-80b675abd5b9.jpg" alt="Tatuaż" class="card-img"></div>
+        <div class="card-item"><img src="fddd8b45-fa11-4fa2-88ed-393dd84bed07.jpg" alt="Tatuaż" class="card-img gallery-img"></div>
+        <div class="card-item"><img src="4290f03b-3eaa-4124-94a1-1c18c924238d.jpg" alt="Tatuaż" class="card-img gallery-img"></div>
+        <div class="card-item"><img src="4306c7da-94ad-46a7-a31d-d7ad55b9233b.jpg" alt="Tatuaż" class="card-img gallery-img"></div>
+        <div class="card-item"><img src="7e62d13c-8061-4f51-be68-3a68561917cc.jpg" alt="Tatuaż" class="card-img gallery-img"></div>
+        <div class="card-item"><img src="f5b34410-a848-44a9-8b67-fe12ebb4f0a9.jpg" alt="Tatuaż" class="card-img gallery-img"></div>
+        <div class="card-item"><img src="2fa26575-0428-477a-9768-00f8b2b7f5ce.jpg" alt="Tatuaż" class="card-img gallery-img"></div>
+        <div class="card-item"><img src="e3b36eba-fb72-4be3-a0b2-80b675abd5b9.jpg" alt="Tatuaż" class="card-img gallery-img"></div>
       </div>
 
       <!-- FAQ -->
@@ -786,16 +795,16 @@
         </div>
         <div class="about-text">
           <h2>O malarstwie</h2>
-          <p>Malarstwo to dla mnie przestrzeń eksperymentu z kolorem, światłem i formą. Przelewam na płótno emocje oraz unikalne wizje, które ożywiają domowe wnętrza.</p>
-          <p>Możesz obejrzeć dostępne prace, sprawdzić ich wymiary oraz przejść bezpośrednio do zakupu na Vinted.</p>
+          <p>Malarstwo to dla mnie naturalne przedłużenie twórczości. Przelewanie wizji na płótno pozwala mi eksperymentować z kolorem w zupełnie inny sposób niż na skórze.</p>
+          <p>Wszystkie aktualnie dostępne prace i ich szczegółowe wymiary znajdziesz bezpośrednio na moim profilu na Vinted.</p>
         </div>
       </section>
 
-      <h2 style="font-family: var(--font-title); font-size: 1.8rem; margin-bottom: 1.5rem; letter-spacing: 1px;">Galeria Obrazów</h2>
+      <h2 style="font-family: var(--font-title); font-size: 1.8rem; margin-bottom: 1.5rem; letter-spacing: 1px;">Galeria Obrazów <span style="font-size: 0.9rem; color: #8b95a5; font-family: var(--font-body); font-weight: 300; letter-spacing: 0;">(kliknij, aby powiększyć)</span></h2>
 
       <div class="grid-3">
         <div class="art-card-item">
-          <div class="art-img-container">
+          <div class="art-img-container gallery-img">
             <img src="94931951-bcdb-4a9f-809a-69933cdd507a.jpg" alt="Obraz olejny" class="base-img">
             <img src="c871d907-20d9-48c5-a7af-5710b0b34e01.jpg" alt="Wizualizacja we wnętrzu" class="vis-img">
           </div>
@@ -819,18 +828,20 @@
     </div>
   </div>
 
+  <!-- LIGHTBOX / POWIĘKSZENIE ZDJĘCIA -->
+  <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+    <img id="lightbox-img" src="" alt="Powiększone zdjęcie">
+  </div>
+
   <footer>
     <p>© 2026 RYDZ TATTOO. ALL RIGHTS RESERVED.</p>
   </footer>
 
   <script>
-    // Funkcja inicjalizująca skrypty śledzące (np. Google Analytics, Pixel itp.)
     function initTracking() {
-      // TUTAJ WKLEJ KOD ŚLEDZĄCY (np. Google Analytics / Meta Pixel), który ma się uruchomić PO ZGODZIE:
       console.log("Zgoda RODO udzielona — skrypty analityczne uruchomione.");
     }
 
-    // Obsługa cookies i RODO po załadowaniu strony
     window.addEventListener('DOMContentLoaded', () => {
       const consent = localStorage.getItem('cookieConsent');
       
@@ -839,23 +850,21 @@
           document.getElementById('cookie-banner').classList.add('show');
         }, 800);
       } else if (consent === 'accepted') {
-        initTracking(); // Jeśli użytkownik już wcześniej wyraził zgodę
+        initTracking(); 
       }
     });
 
     function acceptCookies() {
       localStorage.setItem('cookieConsent', 'accepted');
       document.getElementById('cookie-banner').classList.remove('show');
-      initTracking(); // Uruchomienie skryptów po kliknięciu
+      initTracking(); 
     }
 
     function declineCookies() {
       localStorage.setItem('cookieConsent', 'declined');
       document.getElementById('cookie-banner').classList.remove('show');
-      // Skrypty analityczne NIE są uruchamiane
     }
 
-    // Obsługa rozwijanego FAQ z płynną animacją
     document.querySelectorAll('.faq-question').forEach(question => {
       question.addEventListener('click', () => {
         const item = question.parentElement;
@@ -869,7 +878,6 @@
       });
     });
 
-    // Płynne przełączanie między zakładkami (Tattoo / Art)
     function switchTab(tab) {
       const body = document.body;
       const tabTattoo = document.getElementById('tab-tattoo');
@@ -909,6 +917,34 @@
         }, 300);
       }
     }
+
+    function openLightbox(src) {
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightbox-img');
+      lightboxImg.src = src;
+      lightbox.style.display = 'flex';
+      setTimeout(() => lightbox.classList.add('show'), 10);
+    }
+
+    function closeLightbox() {
+      const lightbox = document.getElementById('lightbox');
+      lightbox.classList.remove('show');
+      setTimeout(() => lightbox.style.display = 'none', 300);
+    }
+
+    document.querySelectorAll('.card-item img.gallery-img').forEach(img => {
+      img.addEventListener('click', (e) => {
+        openLightbox(e.target.src);
+      });
+    });
+
+    document.querySelectorAll('.art-img-container').forEach(container => {
+      container.addEventListener('click', (e) => {
+        if(e.target.tagName === 'IMG') {
+          openLightbox(e.target.src);
+        }
+      });
+    });
   </script>
 </body>
 </html>
