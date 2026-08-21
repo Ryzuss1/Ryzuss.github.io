@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AETHERIA — Cyber-Occult Tattoo & Art Studio</title>
+  <title>RYDZ TATTOO & ART</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,10 +11,8 @@
 
   <style>
     :root {
-      /* TATTOO THEME: Złoto i Głęboki Mrok */
       --bg-dark: #030406;
       --accent-neon: #e6c594;
-      --accent-glow: rgba(230, 197, 148, 0.3);
       --glass-border: rgba(230, 197, 148, 0.25);
       --font-title: 'Syne', sans-serif;
       --font-body: 'Space Grotesk', sans-serif;
@@ -23,9 +21,7 @@
     }
 
     body.mode-art {
-      /* ART THEME: Kosmiczny Szafir i Neon */
       --accent-neon: #00f0ff;
-      --accent-glow: rgba(0, 240, 255, 0.3);
       --glass-border: rgba(0, 240, 255, 0.25);
     }
 
@@ -33,7 +29,7 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      transition: background 0.4s ease, border-color 0.4s ease, color 0.3s ease, transform 0.3s ease;
+      transition: background 0.4s ease, border-color 0.4s ease, color 0.3s ease;
     }
 
     body {
@@ -45,26 +41,45 @@
       position: relative;
     }
 
-    /* CYBERNETYCZNE TŁO */
+    /* PŁYNNE, ŻYWE TŁO AURORA */
     .portal-bg {
       position: fixed;
-      inset: 0;
-      background: radial-gradient(circle at 70% 30%, var(--accent-glow) 0%, transparent 60%);
-      z-index: -2;
+      inset: -50%;
+      width: 200%;
+      height: 200%;
+      z-index: -3;
       pointer-events: none;
+      opacity: 0.5;
+      filter: blur(90px);
+      animation: auroraMove 18s ease infinite alternate;
+    }
+
+    body.mode-tattoo .portal-bg {
+      background: radial-gradient(circle, rgba(230,197,148,0.4) 0%, rgba(90,40,20,0.25) 40%, transparent 70%),
+                  radial-gradient(circle, rgba(40,20,60,0.45) 30%, transparent 80%);
+    }
+
+    body.mode-art .portal-bg {
+      background: radial-gradient(circle, rgba(0,240,255,0.35) 0%, rgba(20,40,90,0.35) 40%, transparent 70%),
+                  radial-gradient(circle, rgba(120,0,200,0.3) 30%, transparent 80%);
+    }
+
+    @keyframes auroraMove {
+      0% { transform: translate(-10%, -10%) rotate(0deg) scale(1); }
+      50% { transform: translate(12%, 18%) rotate(180deg) scale(1.12); }
+      100% { transform: translate(-6%, 6%) rotate(360deg) scale(0.92); }
     }
 
     .grid-mesh {
       position: fixed;
       inset: 0;
-      background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-      background-size: 30px 30px;
-      z-index: -1;
-      opacity: 0.4;
+      background-image: linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+                        linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+      background-size: 50px 50px;
+      z-index: -2;
+      opacity: 0.6;
     }
 
-    /* NAV BAR - MOBILNIE PRZYJAZNY */
     header {
       position: fixed;
       top: 0; left: 0; width: 100%;
@@ -75,29 +90,51 @@
       align-items: center;
       z-index: 1000;
       backdrop-filter: blur(20px);
-      background: rgba(3, 4, 6, 0.9);
+      background: rgba(3, 4, 6, 0.85);
       border-bottom: 1px solid var(--glass-border);
       gap: 1rem;
+      animation: slideDownHeader 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes slideDownHeader {
+      from { transform: translateY(-100%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
     }
 
     .brand {
-      font-family: var(--font-title);
-      font-size: 1.4rem;
-      font-weight: 800;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
       cursor: pointer;
-      text-shadow: 0 0 10px var(--accent-neon);
+      line-height: 1.1;
+      text-transform: uppercase;
       white-space: nowrap;
+    }
+
+    .brand-top {
+      font-family: var(--font-title);
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: 3px;
+      color: #fff;
+    }
+
+    .brand-bottom {
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 400;
+      letter-spacing: 6px;
+      color: #fff;
+      margin-left: 2px;
     }
 
     .switcher-box {
       display: flex;
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(255, 255, 255, 0.04);
       border: 1px solid var(--glass-border);
       padding: 3px;
       border-radius: 30px;
+      backdrop-filter: blur(10px);
     }
 
     .tab-btn {
@@ -117,7 +154,7 @@
     .tab-btn.active {
       background: var(--accent-neon);
       color: #000;
-      box-shadow: 0 0 15px var(--accent-neon);
+      box-shadow: 0 0 20px var(--accent-neon);
     }
 
     .action-link {
@@ -131,16 +168,15 @@
       text-transform: uppercase;
       text-decoration: none;
       clip-path: var(--btn-clip);
-      box-shadow: 0 0 10px var(--accent-neon);
-      white-space: nowrap;
+      box-shadow: 0 0 15px rgba(255,255,255,0.1);
     }
 
     .action-link:hover {
       transform: scale(1.03);
       background: #fff;
+      box-shadow: 0 0 25px var(--accent-neon);
     }
 
-    /* KONTENER STRON */
     main {
       padding-top: 7rem;
       max-width: 1300px;
@@ -155,15 +191,40 @@
 
     .page-view.active {
       display: block;
-      animation: fadeIn 0.5s ease forwards;
+      animation: cinematicFadeIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(15px); }
+    @keyframes cinematicFadeIn {
+      from { 
+        opacity: 0; 
+        transform: translateY(30px) scale(0.98); 
+        filter: blur(10px);
+      }
+      to { 
+        opacity: 1; 
+        transform: translateY(0) scale(1); 
+        filter: blur(0);
+      }
+    }
+
+    /* Kaskadowe animacje elementów wewnątrz widoku */
+    .page-view.active .hero > *,
+    .page-view.active .about-section,
+    .page-view.active .info-section,
+    .page-view.active .grid-3 {
+      animation: staggerUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    .page-view.active .hero > *:nth-child(1) { animation-delay: 0.1s; }
+    .page-view.active .hero > *:nth-child(2) { animation-delay: 0.2s; }
+    .page-view.active .about-section { animation-delay: 0.3s; }
+    .page-view.active .info-section { animation-delay: 0.4s; }
+
+    @keyframes staggerUp {
+      from { opacity: 0; transform: translateY(25px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* SEKCJA HERO */
     .hero {
       display: grid;
       grid-template-columns: 1.2fr 0.8fr;
@@ -183,6 +244,11 @@
     .hero-title span {
       color: var(--accent-neon);
       display: block;
+      text-shadow: 0 0 30px rgba(230,197,148,0.3);
+    }
+
+    body.mode-art .hero-title span {
+      text-shadow: 0 0 30px rgba(0,240,255,0.3);
     }
 
     .hero-desc {
@@ -192,29 +258,28 @@
       line-height: 1.6;
     }
 
-    /* SEKCJA O MNIE */
     .about-section {
       display: grid;
       grid-template-columns: 0.9fr 1.1fr;
       gap: 2.5rem;
       align-items: center;
-      margin-bottom: 5rem;
-      background: rgba(15, 20, 30, 0.5);
+      margin-bottom: 4rem;
+      background: rgba(15, 20, 30, 0.6);
       border: 1px solid var(--glass-border);
       padding: 2rem;
       clip-path: var(--card-clip);
+      backdrop-filter: blur(12px);
     }
 
     .about-img-box {
       width: 100%;
-      height: 300px;
     }
 
     .about-img {
       width: 100%;
-      height: 100%;
-      object-fit: cover;
-      filter: contrast(120%) grayscale(50%);
+      height: auto;
+      display: block;
+      filter: contrast(120%) grayscale(30%);
       border: 1px solid var(--glass-border);
     }
 
@@ -232,13 +297,12 @@
       font-size: 0.95rem;
     }
 
-    /* KARTY I GALERIA */
     .wild-card {
-      background: rgba(15, 20, 30, 0.7);
+      background: rgba(15, 20, 30, 0.75);
       border: 1px solid var(--glass-border);
       padding: 1.8rem;
       clip-path: var(--card-clip);
-      backdrop-filter: blur(15px);
+      backdrop-filter: blur(12px);
     }
 
     .grid-3 {
@@ -246,31 +310,81 @@
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 2rem;
       margin-top: 2rem;
-      margin-bottom: 4rem;
+      margin-bottom: 3rem;
     }
 
     .card-item {
-      background: rgba(255, 255, 255, 0.02);
+      background: rgba(15, 20, 30, 0.5);
       border: 1px solid var(--glass-border);
       padding: 1.5rem;
+      backdrop-filter: blur(10px);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
     }
 
     .card-item:hover {
       border-color: var(--accent-neon);
-      transform: translateY(-5px);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.7);
+      transform: translateY(-8px) scale(1.01);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(230, 197, 148, 0.15);
     }
 
     .card-img {
       width: 100%;
-      height: 260px;
+      height: 380px;
       object-fit: cover;
+      display: block;
       margin-bottom: 1.2rem;
-      filter: grayscale(40%);
+      border: 1px solid var(--glass-border);
     }
 
-    .card-item:hover .card-img {
-      filter: grayscale(0%);
+    .art-card-item {
+      background: rgba(15, 20, 30, 0.5);
+      border: 1px solid var(--glass-border);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      max-width: 360px;
+      margin: 0 auto;
+      backdrop-filter: blur(10px);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .art-card-item:hover {
+      border-color: var(--accent-neon);
+      transform: translateY(-8px) scale(1.01);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(0, 240, 255, 0.15);
+    }
+
+    .art-img-container {
+      position: relative;
+      width: 100%;
+      height: 420px;
+      margin-bottom: 1.2rem;
+      overflow: hidden;
+      border: 1px solid var(--glass-border);
+      background: #000;
+    }
+
+    .art-img-container img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: opacity 0.5s ease;
+    }
+
+    .art-img-container .vis-img {
+      opacity: 0;
+    }
+
+    .art-img-container:hover .base-img {
+      opacity: 0;
+    }
+
+    .art-img-container:hover .vis-img {
+      opacity: 1;
     }
 
     .card-title {
@@ -287,10 +401,99 @@
 
     .price-tag {
       font-family: var(--font-title);
-      font-size: 1.6rem;
+      font-size: 1.5rem;
       color: var(--accent-neon);
       margin-bottom: 1rem;
       font-weight: 800;
+    }
+
+    .info-section {
+      margin-top: 4rem;
+      background: rgba(15, 20, 30, 0.6);
+      border: 1px solid var(--glass-border);
+      padding: 2.5rem;
+      clip-path: var(--card-clip);
+      backdrop-filter: blur(12px);
+    }
+
+    .info-section h3 {
+      font-family: var(--font-title);
+      font-size: 1.4rem;
+      margin-bottom: 1.2rem;
+      color: var(--accent-neon);
+      text-transform: uppercase;
+    }
+
+    .info-section p, .info-section li {
+      color: #909bb0;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin-bottom: 0.8rem;
+    }
+
+    .info-section ul {
+      padding-left: 1.2rem;
+      margin-bottom: 1rem;
+    }
+
+    /* ULTRA PŁYNNE ROZSUWANE FAQ (CUSTOM ACCORDION) */
+    .faq-item {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--glass-border);
+      margin-bottom: 0.8rem;
+      border-radius: 4px;
+      overflow: hidden;
+      transition: border-color 0.3s ease, background 0.3s ease;
+    }
+
+    .faq-item.is-open {
+      border-color: var(--accent-neon);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .faq-question {
+      padding: 1.1rem 1.3rem;
+      font-family: var(--font-title);
+      font-size: 1rem;
+      color: #fff;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+    }
+
+    .faq-question::after {
+      content: '+';
+      font-size: 1.3rem;
+      color: var(--accent-neon);
+      font-weight: 700;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .faq-item.is-open .faq-question::after {
+      transform: rotate(45deg);
+    }
+
+    .faq-answer-wrapper {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .faq-item.is-open .faq-answer-wrapper {
+      grid-template-rows: 1fr;
+    }
+
+    .faq-answer-inner {
+      overflow: hidden;
+    }
+
+    .faq-answer-content {
+      padding: 0 1.3rem 1.3rem 1.3rem;
+      color: #909bb0;
+      font-size: 0.9rem;
+      line-height: 1.6;
     }
 
     footer {
@@ -301,9 +504,9 @@
       color: #606b7d;
       font-size: 0.75rem;
       letter-spacing: 2px;
+      background: rgba(3, 4, 6, 0.5);
     }
 
-    /* ULTRA-RESPONSYWNOŚĆ DLA MAŁYCH TELEFONÓW */
     @media (max-width: 768px) {
       header {
         padding: 0.8rem 1rem;
@@ -311,51 +514,34 @@
         justify-content: center;
         gap: 0.6rem;
       }
-      .brand {
-        font-size: 1.2rem;
-      }
-      .switcher-box {
-        order: 3;
-        width: 100%;
-        justify-content: center;
-      }
-      .tab-btn {
-        flex: 1;
-        text-align: center;
-        padding: 0.5rem;
-      }
-      main {
-        padding-top: 9.5rem;
-      }
-      .hero, .about-section {
-        grid-template-columns: 1fr;
-        padding: 1.2rem;
-        gap: 1.5rem;
-      }
-      .about-img-box {
-        height: 220px;
-      }
-      .hero-title {
-        font-size: 2.2rem;
-      }
+      .brand { align-items: center; }
+      .switcher-box { order: 3; width: 100%; justify-content: center; }
+      .tab-btn { flex: 1; text-align: center; padding: 0.5rem; }
+      main { padding-top: 9.5rem; }
+      .hero, .about-section { grid-template-columns: 1fr; padding: 1.2rem; gap: 1.5rem; }
+      .hero-title { font-size: 2.2rem; }
     }
   </style>
 </head>
 <body class="mode-tattoo">
 
+  <!-- PŁYNNE, ŻYWE TŁO AURORA -->
   <div class="portal-bg"></div>
   <div class="grid-mesh"></div>
 
   <!-- NAWIGACJA -->
   <header>
-    <div class="brand" onclick="switchTab('tattoo')">AETHERIA</div>
+    <div class="brand" onclick="switchTab('tattoo')">
+      <span class="brand-top">* RYDZ *</span>
+      <span class="brand-bottom">t a t t o o</span>
+    </div>
     
     <div class="switcher-box">
       <button class="tab-btn active" id="tab-tattoo" onclick="switchTab('tattoo')">Tatuaże</button>
       <button class="tab-btn" id="tab-art" onclick="switchTab('art')">Malarstwo</button>
     </div>
 
-    <a href="https://instagram.com" target="_blank" class="action-link" id="header-action-btn">Rezerwacja ↗</a>
+    <a href="https://www.instagram.com/rydz.tattoo/" target="_blank" class="action-link" id="header-action-btn">Instagram ↗</a>
   </header>
 
   <main>
@@ -363,125 +549,196 @@
     <div id="view-tattoo" class="page-view active">
       <section class="hero">
         <div>
-          <h1 class="hero-title">Rytuał & <span>Anatomia</span></h1>
-          <p class="hero-desc">Kameralne studio tatuażu autorskiego. Specjalizacja: Microrealism, Fine-Line, Darkwork oraz monumentalne kompozycje anatomiczne dla klienta indywidualnego.</p>
-          <a href="https://instagram.com" target="_blank" class="action-link">Umów Sesję Tatuażu ↗</a>
+          <h1 class="hero-title">Rytuał & <span>Tatuaż</span></h1>
+          <p class="hero-desc">Kameralne studio tatuażu w Katowicach (ul. Poniatowskiego 17/3, studio Bo Mogę). Unikalne projekty dopasowane do Twojego ciała.</p>
+          <a href="https://www.instagram.com/rydz.tattoo/" target="_blank" class="action-link">Odwiedź Instagram ↗</a>
         </div>
 
         <div class="wild-card">
-          <h3 style="font-family: var(--font-title); font-size: 1.3rem; margin-bottom: 0.8rem;">Standardy Studio</h3>
-          <p style="color: #8b95a5; margin-bottom: 1.2rem; font-size: 0.9rem;">Praca w trybie VIP (jeden klient dziennie). Indywidualne projekty bez powielania wzorów.</p>
+          <h3 style="font-family: var(--font-title); font-size: 1.3rem; margin-bottom: 0.8rem;">Lokalizacja</h3>
+          <p style="color: #8b95a5; margin-bottom: 1.2rem; font-size: 0.9rem;">Katowice, ul. Poniatowskiego 17/3 (studio Bo Mogę). Parking płatny pon-pt do 17:00.</p>
           <div style="border-left: 2px solid var(--accent-neon); padding-left: 0.8rem; font-weight: 700; font-size: 0.85rem;">
-            100% AUTORSKIE PROJEKTY
+            INDYWIDUALNE PODEJŚCIE
           </div>
         </div>
       </section>
 
-      <!-- SEKCJA O MNIE - TATUAŻYSTA -->
+      <!-- SEKCJA O MNIE -->
       <section class="about-section">
         <div class="about-img-box">
-          <img src="https://images.unsplash.com/photo-1598371839696-5c5bb00bdc28?auto=format&fit=crop&w=700&q=80" alt="Artysta przy pracy" class="about-img">
+          <img src="fddd8b45-fa11-4fa2-88ed-393dd84bed07.jpg" alt="O mnie" class="about-img">
         </div>
         <div class="about-text">
-          <h2>Kim jestem?</h2>
-          <p>Tworzę na styku mrocznej estetyki, anatomii i nowoczesnej precyzji linii. Moje podejście do tatuażu wykracza poza rzemiosło – to proces transformacji i świadomego naznaczania ciała unikalną formą.</p>
-          <p>Każdy projekt powstaje w kameralnych warunkach, z pełnym skupieniem na Twojej wizji oraz anatomicznej budowie ciała. Nie kopiuję klisz – tworzę dzieła szyte na miarę Twojej skóry.</p>
-          <a href="https://instagram.com" target="_blank" class="action-link" style="margin-top: 0.5rem;">Poznaj mój profil ↗</a>
+          <h2>O mnie</h2>
+          <p>Tworzę tatuaże, które opowiadają historie i stają się integralną częścią Twojej skóry. Każdy projekt traktuję w sposób indywidualny, dbając o najwyższą precyzję wykonania i unikalny styl.</p>
+          <p>Pracuję w przyjaznej atmosferze kameralnego studia w Katowicach. Jeśli szukasz czegoś nietuzinkowego, jesteś w idealnym miejscu.</p>
         </div>
       </section>
 
-      <h2 style="font-family: var(--font-title); font-size: 1.6rem; margin-bottom: 1.5rem;">Przykładowe Projekty & Cennik</h2>
+      <!-- CO MOGĘ DLA CIEBIE ZROBIĆ -->
+      <section class="info-section" style="margin-bottom: 3rem;">
+        <h3>Co mogę dla Ciebie zrobić?</h3>
+        <p>W moich pracach łączę różnorodne techniki i motywy. W osobnych stylach realizuję m.in.:</p>
+        <ul>
+          <li><strong>Napisy i subtelne linie:</strong> precyzyjne, minimalistyczne formy o wysokiej trwałości.</li>
+          <li><strong>Abstrakcja i surrealizm:</strong> odważne kompozycje, nietypowe kształty i przestrzenne formy.</li>
+          <li><strong>Czarne dziarki & Darkwork:</strong> mocne, kontrastowe i mroczniejsze motywy.</li>
+          <li><strong>Kolorowe akcenty i mikrorealizm:</strong> unikalne projekty nasycone barwą, ożywiające skórę.</li>
+        </ul>
+      </section>
+
+      <h2 style="font-family: var(--font-title); font-size: 1.6rem; margin-bottom: 1.5rem;">Przykładowe Realizacje</h2>
       
       <div class="grid-3">
-        <div class="card-item">
-          <img src="https://images.unsplash.com/photo-1598371839696-5c5bb00bdc28?auto=format&fit=crop&w=600&q=80" alt="Botanica" class="card-img">
-          <h3 class="card-title">Fine-Line / Micro</h3>
-          <p class="card-desc">Drobne kompozycje precyzyjne o wysokiej szczegółowości.</p>
-          <div class="price-tag">od 500 PLN</div>
-          <a href="https://instagram.com" target="_blank" class="action-link" style="width: 100%; text-align: center; display: block;">Rezerwuj</a>
-        </div>
-
-        <div class="card-item">
-          <img src="https://images.unsplash.com/photo-1562962230-16e4623d36e6?auto=format&fit=crop&w=600&q=80" alt="Darkwork" class="card-img">
-          <h3 class="card-title">Full Day Session</h3>
-          <p class="card-desc">Całodniowa sesja autorska (6-8 godzin intensywnej pracy).</p>
-          <div class="price-tag">2200 PLN</div>
-          <a href="https://instagram.com" target="_blank" class="action-link" style="width: 100%; text-align: center; display: block;">Rezerwuj</a>
-        </div>
-
-        <div class="card-item">
-          <img src="https://images.unsplash.com/photo-1611501275019-9b5cda994e8d?auto=format&fit=crop&w=600&q=80" alt="Sleeve" class="card-img">
-          <h3 class="card-title">Projekt Duży / Rękaw</h3>
-          <p class="card-desc">Wielosesyjne kompozycje anatomiczne (plecy, rękawy).</p>
-          <div class="price-tag" style="font-size: 1.2rem;">Wycena Indywidualna</div>
-          <a href="https://instagram.com" target="_blank" class="action-link" style="width: 100%; text-align: center; display: block;">Konsultacja</a>
-        </div>
+        <div class="card-item"><img src="fddd8b45-fa11-4fa2-88ed-393dd84bed07.jpg" alt="Tatuaż" class="card-img"></div>
+        <div class="card-item"><img src="4290f03b-3eaa-4124-94a1-1c18c924238d.jpg" alt="Tatuaż" class="card-img"></div>
+        <div class="card-item"><img src="4306c7da-94ad-46a7-a31d-d7ad55b9233b.jpg" alt="Tatuaż" class="card-img"></div>
+        <div class="card-item"><img src="7e62d13c-8061-4f51-be68-3a68561917cc.jpg" alt="Tatuaż" class="card-img"></div>
+        <div class="card-item"><img src="f5b34410-a848-44a9-8b67-fe12ebb4f0a9.jpg" alt="Tatuaż" class="card-img"></div>
+        <div class="card-item"><img src="2fa26575-0428-477a-9768-00f8b2b7f5ce.jpg" alt="Tatuaż" class="card-img"></div>
+        <div class="card-item"><img src="e3b36eba-fb72-4be3-a0b2-80b675abd5b9.jpg" alt="Tatuaż" class="card-img"></div>
       </div>
+
+      <!-- FAQ - ULTRA PŁYNNE ROZSUWANE ELEMENTY -->
+      <section class="info-section">
+        <h3>FAQ — Najczęściej zadawane pytania</h3>
+        
+        <div class="faq-item">
+          <div class="faq-question">Jak się umówić na tatuaż?</div>
+          <div class="faq-answer-wrapper">
+            <div class="faq-answer-inner">
+              <div class="faq-answer-content">
+                Napisz do mnie wiadomość i uwzględnij trzy elementy: 1. Wzór (mój projekt lub opis pomysłu), 2. Miejsce (np. przedramię, łydka), 3. Orientacyjne wymiary (np. 7x7 cm). Na tej podstawie podam widełki cenowe.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">Jak przygotować się do sesji?</div>
+          <div class="faq-answer-wrapper">
+            <div class="faq-answer-inner">
+              <div class="faq-answer-content">
+                Wyśpij się i zjedz coś konkretnego. Nie pij alkoholu ani energetyków. Weź ze sobą coś słodkiego (np. banan, sok). Załóż wygodne ubrania, których nie jest Ci szkoda. Przyjdź punktualnie!
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">Jak pielęgnować świeży tatuaż?</div>
+          <div class="faq-answer-wrapper">
+            <div class="faq-answer-inner">
+              <div class="faq-answer-content">
+                Tatuaż to rana. Myj ręce przed każdym dotknięciem. Przez min. 48h nie pij alkoholu. Second skin zdejmij max. po 48h. Przez 3-5 tygodni przemywaj letnią wodą z szarym mydłem, osuszaj ręcznikiem papierowym i smaruj cienką warstwą kremu 3-4 razy dziennie. Unikaj słońca, basenów, sauny, sportu i nie drap tatuażu.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">Czy można się tatuować latem?</div>
+          <div class="faq-answer-wrapper">
+            <div class="faq-answer-inner">
+              <div class="faq-answer-content">
+                Tak, ale przez miesiąc musisz szczególnie uważać na słońce i zbiorniki wodne ze względu na gojenie.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">Jakie są przeciwwskazania?</div>
+          <div class="faq-answer-wrapper">
+            <div class="faq-answer-inner">
+              <div class="faq-answer-content">
+                Ciąża, karmienie, infekcje, gorączka, hemofilia, choroby układu krążenia, nowotwory w trakcie leczenia, niewyrównana cukrzyca oraz wybrane leki.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- REGULAMIN -->
+      <section class="info-section" style="margin-top: 2rem;">
+        <h3>Regulamin</h3>
+        <p>• <strong>Zadatek:</strong> Jest bezzwrotny. Termin sesji możemy zmienić raz, jeśli dasz znać co najmniej tydzień przed umówionym terminem.</p>
+        <p>• <strong>Projekt:</strong> Mogę poprosić o zdjęcie części ciała w celu dopasowania projektu. Wzór wysyłam przed sesją i istnieje możliwość wprowadzenia zmian.</p>
+        <p>• <strong>Akceptacja:</strong> Wpłata zadatku jest równoznaczna z akceptacją regulaminu.</p>
+        <p>• <strong>Poprawki:</strong> Darmowe do 3 miesięcy od wykonania tatuażu.</p>
+      </section>
     </div>
 
     <!-- PODSTRONA 2: MALARSTWO -->
     <div id="view-art" class="page-view">
       <section class="hero">
         <div>
-          <h1 class="hero-title">Materia & <span>Płótno</span></h1>
-          <p class="hero-desc">Prywatna kolekcja sztuki sztalugowej. Obrazy olejne i akrylowe tworzone na lnianym podłożu, wzbogacone m.in. 24K złotem oraz fakturą mineralną.</p>
-          <a href="https://vinted.pl" target="_blank" class="action-link">Przejdź do Sklepu Vinted ↗</a>
+          <h1 class="hero-title">Malarstwo & <span>Sztuka</span></h1>
+          <p class="hero-desc">Autorska kolekcja obrazów olejnych i akrylowych. Unikalne prace dostępne od ręki.</p>
+          <a href="https://www.vinted.pl/member/97283614-mowmirydz" target="_blank" class="action-link">Przejdź do Sklepu Vinted ↗</a>
         </div>
 
         <div class="wild-card">
-          <h3 style="font-family: var(--font-title); font-size: 1.3rem; margin-bottom: 0.8rem;">Dla Kolekcjonerów</h3>
-          <p style="color: #8b95a5; margin-bottom: 1.2rem; font-size: 0.9rem;">Dzieła dostępne do prywatnych wnętrz oraz jako wielkoformatowe instalacje do przestrzeni ekskluzywnych.</p>
+          <h3 style="font-family: var(--font-title); font-size: 1.3rem; margin-bottom: 0.8rem;">Dostępność</h3>
+          <p style="color: #8b95a5; margin-bottom: 1.2rem; font-size: 0.9rem;">Każdy obraz malowany jest na płótnie z dbałością o detale. Bezpieczna wysyłka i zakupy przez Vinted.</p>
           <div style="border-left: 2px solid var(--accent-neon); padding-left: 0.8rem; font-weight: 700; font-size: 0.85rem;">
-            CERTYFIKAT AUTENTYCZNOŚCI
+            ORYGINALNE DZIEŁA SZTUKI
           </div>
         </div>
       </section>
 
-      <!-- SEKCJA O MNIE - MALARZ -->
+      <!-- SEKCJA O MNIE -->
       <section class="about-section">
         <div class="about-img-box">
-          <img src="https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=700&q=80" alt="Pracownia malarska" class="about-img">
+          <img src="94931951-bcdb-4a9f-809a-69933cdd507a.jpg" alt="Malarstwo o mnie" class="about-img">
         </div>
         <div class="about-text">
-          <h2>Filozofia Twórczości Płóciennej</h2>
-          <p>Moje malarstwo to eksploracja materii, struktury i światła. Wykorzystuję tradycyjne techniki olejne i akrylowe, łącząc je z surowym lnem, płatkami złota oraz masami mineralnymi, co nadaje pracom głębię trójwymiaru.</p>
-          <p>Każdy obraz powstaje powoli, warstwa po warstwie, stając się unikalnym nośnikiem emocji. Moje płótna znajdują dom w prywatnych kolekcjach w kraju i zagranicą.</p>
-          <a href="https://vinted.pl" target="_blank" class="action-link" style="margin-top: 0.5rem;">Zobacz dostępne prace ↗</a>
+          <h2>O malarstwie</h2>
+          <p>Malarstwo to dla mnie przestrzeń eksperymentu z kolorem, światłem i formą. Przelewam na płótno emocje oraz unikalne wizje, które ożywiają domowe wnętrza.</p>
+          <p>Możesz obejrzeć dostępne prace, sprawdzić ich wymiary oraz przejść bezpośrednio do zakupu na Vinted.</p>
         </div>
       </section>
 
-      <h2 style="font-family: var(--font-title); font-size: 1.6rem; margin-bottom: 1.5rem;">Galeria Dzieł Sztuki & Przykładowe Projekty</h2>
+      <h2 style="font-family: var(--font-title); font-size: 1.6rem; margin-bottom: 1.5rem;">Galeria Obrazów</h2>
 
       <div class="grid-3">
-        <div class="card-item">
-          <img src="https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=600&q=80" alt="Canvas" class="card-img">
-          <h3 class="card-title">Eteryczny Horyzont</h3>
-          <p class="card-desc">Akryl & Złoto 24K | 120 x 90 cm (Dostępne)</p>
-          <a href="https://vinted.pl" target="_blank" class="action-link" style="width: 100%; text-align: center; display: block;">Kup na Vinted ↗</a>
-        </div>
-
-        <div class="card-item">
-          <img src="https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&w=600&q=80" alt="Texture" class="card-img">
-          <h3 class="card-title">Materia & Czas</h3>
-          <p class="card-desc">Olej & Struktura Mineralna | 80 x 80 cm (Kolekcja prywatna)</p>
-          <a href="https://vinted.pl" target="_blank" class="action-link" style="width: 100%; text-align: center; display: block;">Kup na Vinted ↗</a>
-        </div>
-
-        <div class="card-item">
-          <img src="https://images.unsplash.com/photo-1578926375705-90ae3353f50a?auto=format&fit=crop&w=600&q=80" alt="Oil Painting" class="card-img">
-          <h3 class="card-title">Nocny Nokturn</h3>
-          <p class="card-desc">Olej na surowym lnie | 140 x 100 cm (Archiwum projektów)</p>
-          <a href="https://vinted.pl" target="_blank" class="action-link" style="width: 100%; text-align: center; display: block;">Kup na Vinted ↗</a>
+        <div class="art-card-item">
+          <div class="art-img-container">
+            <img src="94931951-bcdb-4a9f-809a-69933cdd507a.jpg" alt="Obraz olejny" class="base-img">
+            <img src="c871d907-20d9-48c5-a7af-5710b0b34e01.jpg" alt="Wizualizacja we wnętrzu" class="vis-img">
+          </div>
+          <h3 class="card-title">Obraz olejny</h3>
+          <p class="card-desc">Wymiary: 30 x 40 cm</p>
+          <div class="price-tag">1500 zł</div>
+          <a href="https://www.vinted.pl/member/97283614-mowmirydz" target="_blank" class="action-link" style="width: 100%; text-align: center; display: block;">Kup na Vinted ↗</a>
         </div>
       </div>
     </div>
   </main>
 
   <footer>
-    <p>© 2026 AETHERIA ART & TATTOO STUDIO. ALL RIGHTS RESERVED.</p>
+    <p>© 2026 RYDZ TATTOO. ALL RIGHTS RESERVED.</p>
   </footer>
 
   <script>
+    // Obsługa rozwijanego FAQ z płynną animacją
+    document.querySelectorAll('.faq-question').forEach(question => {
+      question.addEventListener('click', () => {
+        const item = question.parentElement;
+        const isOpen = item.classList.contains('is-open');
+        
+        // Opcjonalnie: zamknij pozostałe (zostaw odkomentowane, jeśli chcesz żeby tylko jedno było otwarte naraz)
+        // document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('is-open'));
+
+        if (!isOpen) {
+          item.classList.add('is-open');
+        } else {
+          item.classList.remove('is-open');
+        }
+      });
+    });
+
+    // Płynne przełączanie między zakładkami (Tattoo / Art)
     function switchTab(tab) {
       const body = document.body;
       const tabTattoo = document.getElementById('tab-tattoo');
@@ -495,8 +752,8 @@
         tabTattoo.classList.add('active');
         tabArt.classList.remove('active');
 
-        headerBtn.innerText = 'Rezerwacja ↗';
-        headerBtn.href = 'https://instagram.com';
+        headerBtn.innerText = 'Instagram ↗';
+        headerBtn.href = 'https://www.instagram.com/rydz.tattoo/';
 
         viewArt.classList.remove('active');
         setTimeout(() => {
@@ -511,7 +768,7 @@
         tabTattoo.classList.remove('active');
 
         headerBtn.innerText = 'Sklep Vinted ↗';
-        headerBtn.href = 'https://vinted.pl';
+        headerBtn.href = 'https://www.vinted.pl/member/97283614-mowmirydz';
 
         viewTattoo.classList.remove('active');
         setTimeout(() => {
