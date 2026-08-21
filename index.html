@@ -100,7 +100,7 @@
       opacity: 0.6;
     }
 
-    /* WYSKAKUJĄCE DYNIE */
+    /* WYSKAKUJĄCE DYNIE (DLA TATUAŻY) */
     .flying-pumpkin {
       position: fixed;
       z-index: 9999;
@@ -111,24 +111,32 @@
       transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.2s ease;
     }
 
-    .flying-pumpkin.pop-left {
-      left: -60px;
+    .flying-pumpkin.pop-left { left: -60px; }
+    .flying-pumpkin.pop-right { right: -60px; }
+    .flying-pumpkin.show-pumpkin { opacity: 1; }
+    .flying-pumpkin.pop-left.show-pumpkin { transform: translateX(70px) scale(1.3) rotate(-20deg); }
+    .flying-pumpkin.pop-right.show-pumpkin { transform: translateX(-70px) scale(1.3) rotate(20deg); }
+
+    /* SPADAJĄCE FARBY (DLA MALARSTWA) */
+    .falling-paint {
+      position: fixed;
+      top: -50px;
+      z-index: 9999;
+      pointer-events: none;
+      opacity: 0.85;
+      filter: drop-shadow(0 0 10px rgba(0, 240, 255, 0.6));
+      animation: dropPaint linear forwards;
     }
 
-    .flying-pumpkin.pop-right {
-      right: -60px;
-    }
-
-    .flying-pumpkin.show-pumpkin {
-      opacity: 1;
-    }
-
-    .flying-pumpkin.pop-left.show-pumpkin {
-      transform: translateX(70px) scale(1.3) rotate(-20deg);
-    }
-
-    .flying-pumpkin.pop-right.show-pumpkin {
-      transform: translateX(-70px) scale(1.3) rotate(20deg);
+    @keyframes dropPaint {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0.9;
+      }
+      100% {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+      }
     }
 
     /* WSPÓLNY KONTENER GÓRNY */
@@ -1134,27 +1142,40 @@
 
       startCarouselTimer();
       
-      // SZYBKIE I MASOWE WYKAKUJĄCE DYNIE Z OBCU STRON
-      setTimeout(spawnPumpkinsBurst, 1000);
+      // Domyślnie startujemy dynie dla tatuaży
+      startPumpkins();
     });
 
-    // FUNKCJA GENERUJĄCA MASOWO WYSKAKUJĄCE DYNIE Z OBCU STRON
+    // ZMIENNA DO KONTROLI DYNIO-ANIMACJI
+    let pumpkinsActive = false;
+    let pumpkinTimeoutId = null;
+
+    function startPumpkins() {
+      pumpkinsActive = true;
+      spawnPumpkinsBurst();
+    }
+
+    function stopPumpkins() {
+      pumpkinsActive = false;
+      clearTimeout(pumpkinTimeoutId);
+      document.querySelectorAll('.flying-pumpkin').forEach(el => el.remove());
+    }
+
     function spawnPumpkinsBurst() {
-      // Losujemy czy wyskakuje lewa, prawa, czy obie strony na raz
-      const sideOption = Math.random();
+      if (!pumpkinsActive) return;
       
+      const sideOption = Math.random();
       if (sideOption < 0.35) {
         createPumpkin('left');
       } else if (sideOption < 0.7) {
         createPumpkin('right');
       } else {
         createPumpkin('left');
-        createPumpkin('right'); // Czasem obie naraz!
+        createPumpkin('right');
       }
       
-      // Bardzo krótki odstęp czasowy (od 300ms do 800ms) dla dużej dynamiki
       const nextTime = Math.floor(Math.random() * 500) + 300;
-      setTimeout(spawnPumpkinsBurst, nextTime);
+      pumpkinTimeoutId = setTimeout(spawnPumpkinsBurst, nextTime);
     }
 
     function createPumpkin(side) {
@@ -1162,24 +1183,67 @@
       pumpkin.className = `flying-pumpkin ${side === 'left' ? 'pop-left' : 'pop-right'}`;
       pumpkin.innerText = '🎃';
       
-      // Losowa wysokość na ekranie
       const randomTop = Math.floor(Math.random() * 80) + 10;
       pumpkin.style.top = randomTop + '%';
       
       document.body.appendChild(pumpkin);
       
-      // Szybkie wyskoczenie
       setTimeout(() => {
         pumpkin.classList.add('show-pumpkin');
       }, 30);
       
-      // Szybkie schowanie po 0.8 sekundy
       setTimeout(() => {
         pumpkin.classList.remove('show-pumpkin');
-        setTimeout(() => {
-          pumpkin.remove();
-        }, 250);
+        setTimeout(() => pumpkin.remove(), 250);
       }, 800);
+    }
+
+    // ZMIENNE DO KONTROLI SPADAJĄCYCH FARB (MALARSTWO)
+    let paintActive = false;
+    let paintTimeoutId = null;
+
+    function startPaintDrops() {
+      paintActive = true;
+      spawnPaintDrop();
+    }
+
+    function stopPaintDrops() {
+      paintActive = false;
+      clearTimeout(paintTimeoutId);
+      document.querySelectorAll('.falling-paint').forEach(el => el.remove());
+    }
+
+    function spawnPaintDrop() {
+      if (!paintActive) return;
+
+      const paint = document.createElement('div');
+      paint.className = 'falling-paint';
+      
+      // Emoji kojarzące się z malarstwem / farbami / pędzlami
+      const paints = ['🎨', '💧', '🖌️', '🔵', '🔴', '🟡', '🟣', '🟢'];
+      paint.innerText = paints[Math.floor(Math.random() * paints.length)];
+      
+      // Losowa pozycja w poziomie
+      const randomX = Math.random() * (window.innerWidth - 60);
+      paint.style.left = randomX + 'px';
+      
+      // Powolne opadanie (czas trwania od 5 do 9 sekund)
+      const duration = Math.random() * 4 + 5;
+      paint.style.animationDuration = duration + 's';
+      
+      // Losowa wielkość
+      const size = Math.random() * 1.2 + 1.3;
+      paint.style.fontSize = size + 'rem';
+      
+      document.body.appendChild(paint);
+
+      setTimeout(() => {
+        paint.remove();
+      }, duration * 1000);
+
+      // Kolejna kropla pojawia się w miarę spokojnie (co 700-1400ms)
+      const nextTime = Math.floor(Math.random() * 700) + 700;
+      paintTimeoutId = setTimeout(spawnPaintDrop, nextTime);
     }
 
     function acceptCookies() {
@@ -1244,6 +1308,10 @@
         headerBtn.innerText = 'Instagram ↗';
         headerBtn.href = 'https://www.instagram.com/rydz.tattoo/';
 
+        // Wyłączamy farby, włączamy dynie
+        stopPaintDrops();
+        startPumpkins();
+
         viewArt.classList.remove('active');
         setTimeout(() => {
           viewArt.style.display = 'none';
@@ -1258,6 +1326,10 @@
 
         headerBtn.innerText = 'Vinted ↗';
         headerBtn.href = 'https://www.vinted.pl/member/97283614-mowmirydz';
+
+        // Wyłączamy dynie, włączamy wolno spadające farby
+        stopPumpkins();
+        startPaintDrops();
 
         viewTattoo.classList.remove('active');
         setTimeout(() => {
