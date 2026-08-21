@@ -20,8 +20,8 @@
 
     :root {
       --bg-dark: #030406;
-      --accent-neon: #e6c594;
-      --glass-border: rgba(230, 197, 148, 0.25);
+      --accent-neon: #ff7518; /* Kolor tangerine */
+      --glass-border: rgba(255, 117, 24, 0.25);
       --font-title: 'Amoria', 'Syne', serif;
       --font-body: 'Lato', sans-serif;
       --btn-clip: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
@@ -75,7 +75,7 @@
     }
 
     body.mode-tattoo .portal-bg {
-      background: radial-gradient(circle, rgba(230,197,148,0.4) 0%, rgba(90,40,20,0.25) 40%, transparent 70%),
+      background: radial-gradient(circle, rgba(255,117,24,0.4) 0%, rgba(90,40,20,0.25) 40%, transparent 70%),
                   radial-gradient(circle, rgba(40,20,60,0.45) 30%, transparent 80%);
     }
 
@@ -164,11 +164,42 @@
       cursor: pointer;
     }
 
-    .brand-logo {
-      height: 65px;
-      width: auto;
-      display: block;
-      object-fit: contain;
+    /* STYLIZACJA TEKSTOWEGO LOGO DOPASOWANA DO WZORCA */
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      line-height: 1.1;
+    }
+
+    .brand-main {
+      font-family: var(--font-title);
+      font-size: 1.6rem;
+      color: var(--accent-neon);
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-shadow: 0 0 20px rgba(255,117,24,0.3);
+    }
+
+    .brand-star {
+      font-size: 0.75rem;
+      color: var(--accent-neon);
+      vertical-align: middle;
+      line-height: 1;
+    }
+
+    .brand-sub {
+      font-family: var(--font-body);
+      font-size: 1.35rem;
+      color: #fff;
+      font-weight: 300;
+      text-transform: lowercase;
+      letter-spacing: 6px;
+      margin-top: -2px;
+      margin-left: 6px;
     }
 
     .switcher-box {
@@ -302,7 +333,7 @@
     .hero-title span {
       color: var(--accent-neon);
       display: block;
-      text-shadow: 0 0 30px rgba(230,197,148,0.3);
+      text-shadow: 0 0 30px rgba(255,117,24,0.3);
     }
 
     body.mode-art .hero-title span {
@@ -459,7 +490,7 @@
     .card-item:hover {
       border-color: var(--accent-neon);
       transform: translateY(-8px) scale(1.01);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(230, 197, 148, 0.15);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(255, 117, 24, 0.15);
     }
 
     .card-img {
@@ -748,10 +779,6 @@
         justify-content: center;
         gap: 0.8rem;
       }
-      
-      .brand-logo {
-        height: 52px;
-      }
 
       .brand { align-items: center; }
       .switcher-box { order: 3; width: 100%; justify-content: center; }
@@ -804,7 +831,12 @@
   <div class="header-container">
     <header>
       <div class="brand" onclick="switchTab('tattoo')">
-        <img src="Logo1.jpg" alt="RYDZ TATTOO & ART" class="brand-logo">
+        <div class="brand-text">
+          <div class="brand-main">
+            <span class="brand-star">✴︎</span> RYDZ <span class="brand-star">✴︎</span>
+          </div>
+          <span class="brand-sub">tattoo</span>
+        </div>
       </div>
       
       <div class="switcher-box">
@@ -872,12 +904,12 @@
       
       <!-- ZAKŁADKI / FILTRY KATEGORII -->
       <div class="tattoo-filters">
-        <button class="filter-btn active" data-filter="all">Wszystkie</button>
+        <button class="filter-btn" data-filter="kolorowe">Kolorowe</button>
         <button class="filter-btn" data-filter="abstrakcje">Abstrakcje</button>
         <button class="filter-btn" data-filter="czarne">Czarne</button>
         <button class="filter-btn" data-filter="napisy">Napisy</button>
-        <button class="filter-btn" data-filter="kolorowe">Kolorowe</button>
-        <button class="filter-btn" data-filter="biale">Biale</button>
+        <button class="filter-btn" data-filter="biale">Białe</button>
+        <button class="filter-btn active" data-filter="all">Wszystkie</button>
       </div>
 
       <div class="grid-3">
