@@ -32,6 +32,15 @@
       --glass-border: rgba(0, 240, 255, 0.25);
     }
 
+    /* UKRYCIE NAWIGACJI I DOSTOSOWANIE ODSTĘPU DLA MALARSTWA */
+    body.mode-art .quick-nav {
+      display: none;
+    }
+
+    body.mode-art main {
+      padding-top: 10.5rem;
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -743,6 +752,10 @@
 
     /* RESPONSYWNOŚĆ DLA TELEFONÓW (2 KOLUMNY ZDJĘĆ) */
     @media (max-width: 768px) {
+      body.mode-art main {
+        padding-top: 12.5rem;
+      }
+
       header {
         padding: 0.9rem 1rem;
         flex-wrap: wrap;
