@@ -20,7 +20,7 @@
 
     :root {
       --bg-dark: #030406;
-      --accent-neon: #7F00FF; /* Nowy akcent fioletowy */
+      --accent-neon: #7F00FF; /* Fioletowy akcent */
       --glass-border: rgba(127, 0, 255, 0.25);
       --font-title: 'Amoria', 'Syne', serif;
       --font-body: 'Lato', sans-serif;
@@ -100,6 +100,37 @@
       opacity: 0.6;
     }
 
+    /* WYSKAKUJĄCE DYNIE */
+    .flying-pumpkin {
+      position: fixed;
+      z-index: 9999;
+      font-size: 3rem;
+      pointer-events: none;
+      opacity: 0;
+      filter: drop-shadow(0 0 12px rgba(127, 0, 255, 0.7));
+      transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.2s ease;
+    }
+
+    .flying-pumpkin.pop-left {
+      left: -60px;
+    }
+
+    .flying-pumpkin.pop-right {
+      right: -60px;
+    }
+
+    .flying-pumpkin.show-pumpkin {
+      opacity: 1;
+    }
+
+    .flying-pumpkin.pop-left.show-pumpkin {
+      transform: translateX(70px) scale(1.3) rotate(-20deg);
+    }
+
+    .flying-pumpkin.pop-right.show-pumpkin {
+      transform: translateX(-70px) scale(1.3) rotate(20deg);
+    }
+
     /* WSPÓLNY KONTENER GÓRNY */
     .header-container {
       position: fixed;
@@ -164,7 +195,6 @@
       cursor: pointer;
     }
 
-    /* STYLIZACJA TEKSTOWEGO LOGO DOPASOWANA DO WZORCA */
     .brand-text {
       display: flex;
       flex-direction: column;
@@ -232,7 +262,6 @@
       box-shadow: 0 0 20px var(--accent-neon);
     }
 
-    /* ZAKŁADKI / FILTRY GALERII TATUAŻY */
     .tattoo-filters {
       display: flex;
       justify-content: center;
@@ -1104,7 +1133,54 @@
       }
 
       startCarouselTimer();
+      
+      // SZYBKIE I MASOWE WYKAKUJĄCE DYNIE Z OBCU STRON
+      setTimeout(spawnPumpkinsBurst, 1000);
     });
+
+    // FUNKCJA GENERUJĄCA MASOWO WYSKAKUJĄCE DYNIE Z OBCU STRON
+    function spawnPumpkinsBurst() {
+      // Losujemy czy wyskakuje lewa, prawa, czy obie strony na raz
+      const sideOption = Math.random();
+      
+      if (sideOption < 0.35) {
+        createPumpkin('left');
+      } else if (sideOption < 0.7) {
+        createPumpkin('right');
+      } else {
+        createPumpkin('left');
+        createPumpkin('right'); // Czasem obie naraz!
+      }
+      
+      // Bardzo krótki odstęp czasowy (od 300ms do 800ms) dla dużej dynamiki
+      const nextTime = Math.floor(Math.random() * 500) + 300;
+      setTimeout(spawnPumpkinsBurst, nextTime);
+    }
+
+    function createPumpkin(side) {
+      const pumpkin = document.createElement('div');
+      pumpkin.className = `flying-pumpkin ${side === 'left' ? 'pop-left' : 'pop-right'}`;
+      pumpkin.innerText = '🎃';
+      
+      // Losowa wysokość na ekranie
+      const randomTop = Math.floor(Math.random() * 80) + 10;
+      pumpkin.style.top = randomTop + '%';
+      
+      document.body.appendChild(pumpkin);
+      
+      // Szybkie wyskoczenie
+      setTimeout(() => {
+        pumpkin.classList.add('show-pumpkin');
+      }, 30);
+      
+      // Szybkie schowanie po 0.8 sekundy
+      setTimeout(() => {
+        pumpkin.classList.remove('show-pumpkin');
+        setTimeout(() => {
+          pumpkin.remove();
+        }, 250);
+      }, 800);
+    }
 
     function acceptCookies() {
       localStorage.setItem('cookieConsent', 'accepted');
