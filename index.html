@@ -24,7 +24,6 @@
       --glass-border: rgba(230, 197, 148, 0.25);
       --font-title: 'Amoria', 'Syne', serif;
       --font-body: 'Lato', sans-serif;
-      --card-clip: polygon(0 0, 100% 0, 98% 100%, 0% 100%);
       --btn-clip: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
     }
 
@@ -136,33 +135,35 @@
       margin-left: 2px;
     }
 
+    /* POWIĘKSZONY I BARDZIEJ WIDOCZNY PRZEŁĄCZNIK ZAKŁADEK */
     .switcher-box {
       display: flex;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid var(--glass-border);
-      padding: 3px;
-      border-radius: 30px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 2px solid var(--accent-neon);
+      padding: 5px;
+      border-radius: 40px;
       backdrop-filter: blur(10px);
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
     }
 
     .tab-btn {
       border: none;
       background: transparent;
       color: #fff;
-      padding: 0.4rem 1rem;
+      padding: 0.7rem 2rem;
       font-family: var(--font-body);
-      font-size: 0.75rem;
+      font-size: 0.95rem;
       font-weight: 700;
-      letter-spacing: 1px;
+      letter-spacing: 1.5px;
       text-transform: uppercase;
       cursor: pointer;
-      border-radius: 20px;
+      border-radius: 30px;
     }
 
     .tab-btn.active {
       background: var(--accent-neon);
       color: #000;
-      box-shadow: 0 0 20px var(--accent-neon);
+      box-shadow: 0 0 25px var(--accent-neon);
     }
 
     .action-link {
@@ -252,7 +253,7 @@
       font-weight: 300;
     }
 
-    /* SEKCJA O MNIE Z KARUZELĄ */
+    /* SEKCJA O MNIE Z KARUZELĄ (PROSTOKĄTNA RAMKA) */
     .about-section {
       display: grid;
       grid-template-columns: 0.9fr 1.1fr;
@@ -262,7 +263,7 @@
       background: rgba(15, 20, 30, 0.6);
       border: 1px solid var(--glass-border);
       padding: 2.5rem;
-      clip-path: var(--card-clip);
+      border-radius: 6px;
       backdrop-filter: blur(12px);
     }
 
@@ -366,7 +367,7 @@
       background: rgba(15, 20, 30, 0.75);
       border: 1px solid var(--glass-border);
       padding: 1.8rem;
-      clip-path: var(--card-clip);
+      border-radius: 6px;
       backdrop-filter: blur(12px);
     }
 
@@ -476,12 +477,13 @@
       font-weight: 700;
     }
 
+    /* PROSTOKĄTNA SEKCJA INFORMACYJNA */
     .info-section {
       margin-top: 4rem;
       background: rgba(15, 20, 30, 0.6);
       border: 1px solid var(--glass-border);
       padding: 2.5rem;
-      clip-path: var(--card-clip);
+      border-radius: 6px;
       backdrop-filter: blur(12px);
     }
 
@@ -674,8 +676,8 @@
       }
       .brand { align-items: center; }
       .switcher-box { order: 3; width: 100%; justify-content: center; }
-      .tab-btn { flex: 1; text-align: center; padding: 0.5rem; }
-      main { padding-top: 10.5rem; }
+      .tab-btn { flex: 1; text-align: center; padding: 0.6rem 1rem; font-size: 0.85rem; }
+      main { padding-top: 11.5rem; }
       .hero, .about-section { grid-template-columns: 1fr; padding: 1.2rem; gap: 1.5rem; }
       .hero-title { font-size: 2.3rem; }
       #cookie-banner { left: 10px; right: 10px; bottom: 10px; }
@@ -708,7 +710,7 @@
       <section class="hero">
         <div>
           <h1 class="hero-title">Cześć, z tej strony <span>Rydz</span></h1>
-          <p class="hero-desc">Kameralne studio tatuażu w Katowicach (ul. Poniatowskiego 17/3, studio Bo Mogę). Unikalne projekty dopasowane do Twojego ciała.</p>
+          
           <a href="https://www.instagram.com/rydz.tattoo/" target="_blank" class="action-link">Odwiedź Instagram ↗</a>
         </div>
 
@@ -741,9 +743,9 @@
         </div>
         <div class="about-text">
           <h2>O mnie</h2>
-          <p>Cześć, z tej strony Rydz!</p>
+          
           <p>Jestem tatuatorką z Katowic i zamieniam codzienność w kolorowe dziarki 🎨 Jeżeli szukasz osoby, z którą można pogadać o wszystkim albo pomilczeć w komfortowej atmosferze - to właśnie ją znalazłeś. Przede wszystkim dbam o komfort swoich klientów, więc nie obawiaj się zadawać pytań. Jestem po to, żeby na nie odpowiedzieć i rozwiać Twoje wątpliwości ❤️</p>
-          <p>No dobra, ale jakie tatuaże właściwie wykonuję?<br>Najbardziej kocham kolorowe dziarki i to właśnie ich wykonuję najwięcej 🎨 Ale nie samym kolorem człowiek żyje - równie chętnie tworzę też czarne tatuaże, abstrakcje czy napisy. Zjedź niżej, żeby zobaczyć moje realizacje i sprawdź, w jakim klimacie mogłabym stworzyć coś dla Ciebie 🙂</p>
+          <p>No dobra, ale jakie tatuaże właściwie wykonuję?<br>Najbardziej kocham kolorowe dziarki i to właśnie ich wykonuję najwięcej 🎨 Але nie samym kolorem człowiek żyje - równie chętnie tworzę też czarne tatuaże, abstrakcje czy napisy. Zjedź niżej, żeby zobaczyć moje realizacje i sprawdź, w jakim klimacie mogłabym stworzyć coś dla Ciebie 🙂</p>
         </div>
       </section>
 
@@ -844,7 +846,7 @@
     <div id="view-art" class="page-view">
       <section class="hero">
         <div>
-          <h1 class="hero-title">Malarstwo & <span>Sztuka</span></h1>
+          <h1 class="hero-title">Malarstwo <span>Olejne</span></h1>
           <p class="hero-desc">Autorska kolekcja obrazów olejnych i akrylowych. Unikalne prace dostępne od ręki.</p>
           <a href="https://www.vinted.pl/member/97283614-mowmirydz" target="_blank" class="action-link">Przejdź do Sklepu Vinted ↗</a>
         </div>
