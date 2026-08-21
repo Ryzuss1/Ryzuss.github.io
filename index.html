@@ -21,7 +21,7 @@
       --border-color: rgba(212, 175, 55, 0.18);
       --font-title: 'Cinzel', serif;
       --font-body: 'Plus Jakarta Sans', sans-serif;
-      --bg-image: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1920&q=80');
+      --bg-image: url('https://images.unsplash.com/photo-1598371839696-5c5bb00bdc28?auto=format&fit=crop&w=1920&q=80');
       --transition-speed: 0.6s;
     }
 
@@ -34,11 +34,18 @@
       --card-bg: rgba(15, 25, 45, 0.65);
       --nav-bg: rgba(8, 13, 26, 0.85);
       --border-color: rgba(74, 144, 226, 0.2);
-      --bg-image: url('https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&w=1920&q=80');
+      --bg-image: url('https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=1920&q=80');
     }
 
-    html { scroll-behavior: smooth; }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html {
+      scroll-behavior: smooth;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     body {
       background-color: var(--bg-color);
@@ -49,20 +56,22 @@
       line-height: 1.6;
     }
 
+    /* BACKGROUND PARALLAX */
     .bg-canvas {
       position: fixed;
       top: 0; left: 0;
       width: 110%; height: 110%;
-      background-image: radial-gradient(circle at 50% 30%, transparent 10%, var(--bg-color) 80%), var(--bg-image);
+      background-image: radial-gradient(circle at 50% 30%, transparent 20%, var(--bg-color) 85%), var(--bg-image);
       background-size: cover;
       background-position: center;
-      opacity: 0.35;
+      opacity: 0.25;
       z-index: -2;
-      filter: contrast(120%) brightness(80%);
+      filter: contrast(120%) saturate(110%);
       transition: background-image var(--transition-speed) ease, opacity var(--transition-speed) ease;
       will-change: transform;
     }
 
+    /* HEADER & NAV */
     header {
       position: fixed;
       top: 0; width: 100%;
@@ -151,10 +160,11 @@
     body.theme-tattoo .btn-art-only { display: none !important; }
     body.theme-art .btn-tattoo-only { display: none !important; }
 
+    /* LAYOUT & ANIMATIONS */
     .page {
       display: none;
       min-height: 100vh;
-      padding: 8rem 2rem 5rem 2rem;
+      padding: 9rem 2rem 5rem 2rem;
       max-width: 1300px;
       margin: 0 auto;
       opacity: 0;
@@ -181,23 +191,23 @@
 
     .hero-title {
       font-family: var(--font-title);
-      font-size: 4rem;
+      font-size: 4.2rem;
       text-align: center;
       line-height: 1.1;
       letter-spacing: 2px;
       background: linear-gradient(180deg, #ffffff 30%, var(--text-muted) 100%);
-      background-clip: text;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      margin-bottom: 0.8rem;
+      margin-bottom: 1rem;
     }
 
     .hero-subtitle {
       text-align: center;
-      font-size: 1.15rem;
+      font-size: 1.2rem;
       color: var(--text-muted);
-      margin-bottom: 4rem;
+      margin-bottom: 5rem;
       font-weight: 300;
+      letter-spacing: 1px;
     }
 
     .glass-card {
@@ -208,7 +218,15 @@
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
-      transition: border-color 0.4s ease, box-shadow 0.4s ease;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.1s ease-out;
+      transform-style: preserve-3d;
+    }
+
+    .glass-card:hover {
+      border-color: var(--accent-color);
+      box-shadow: 0 0 30px var(--accent-glow), 0 20px 40px rgba(0,0,0,0.6);
     }
 
     .about-main {
@@ -227,7 +245,7 @@
 
     .about-img {
       width: 100%;
-      height: 500px;
+      height: 520px;
       object-fit: cover;
       display: block;
       transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
@@ -237,8 +255,9 @@
 
     .about-text h2 {
       font-family: var(--font-title);
-      font-size: 2.8rem;
+      font-size: 3rem;
       margin-bottom: 1.5rem;
+      line-height: 1.2;
     }
 
     .about-text p {
@@ -247,7 +266,7 @@
       font-size: 1.05rem;
     }
 
-    .pricing-section { margin: 7rem 0 4rem 0; }
+    .pricing-section { margin: 8rem 0 4rem 0; }
 
     .section-tag {
       font-size: 0.8rem;
@@ -255,7 +274,7 @@
       text-transform: uppercase;
       color: var(--accent-color);
       font-weight: 700;
-      margin-bottom: 0.8rem;
+      margin-bottom: 1rem;
       display: block;
     }
 
@@ -267,72 +286,57 @@
       margin-bottom: 1.5rem;
     }
 
-    .pricing-list-container {
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 2.5rem;
+      margin-top: 3.5rem;
+    }
+
+    .pricing-card {
       display: flex;
       flex-direction: column;
-      gap: 1.5rem;
-      margin-top: 3rem;
+      justify-content: space-between;
     }
 
-    .pricing-row {
-      display: grid;
-      grid-template-columns: 1.2fr 1fr 1fr 180px;
-      align-items: center;
-      background: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 14px;
-      padding: 1.8rem 2.5rem;
-      backdrop-filter: blur(16px);
-      transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .pricing-row::before {
-      content: '';
-      position: absolute;
-      left: 0; top: 0;
-      width: 4px; height: 100%;
-      background: var(--accent-color);
-      opacity: 0.3;
-      transition: opacity 0.3s ease;
-    }
-
-    .pricing-row:hover {
-      transform: translateX(8px);
-      border-color: var(--accent-color);
-      box-shadow: 0 10px 30px var(--accent-glow);
-    }
-
-    .pricing-row:hover::before { opacity: 1; }
-
-    .pricing-row-featured {
-      background: rgba(212, 175, 55, 0.05);
-      border-color: var(--accent-color);
-    }
-
-    .pricing-row-title {
+    .pricing-card h3 {
       font-family: var(--font-title);
-      font-size: 1.5rem;
-      font-weight: 600;
+      font-size: 1.6rem;
+      margin-bottom: 1rem;
     }
 
-    .pricing-row-desc {
+    .pricing-price {
+      font-family: var(--font-title);
+      font-size: 3.2rem;
+      color: var(--accent-color);
+      margin-bottom: 2rem;
+      font-weight: 700;
+      text-shadow: 0 0 20px var(--accent-glow);
+    }
+
+    .pricing-features {
+      list-style: none;
+      margin-bottom: 2rem;
+    }
+
+    .pricing-features li {
+      position: relative;
+      padding-left: 1.8rem;
       color: var(--text-muted);
       font-size: 0.95rem;
-      padding-right: 1rem;
+      margin-bottom: 1rem;
     }
 
-    .pricing-row-price {
-      font-family: var(--font-title);
-      font-size: 2.2rem;
+    .pricing-features li::before {
+      content: '◈';
+      position: absolute;
+      left: 0; top: 0;
       color: var(--accent-color);
-      font-weight: 700;
     }
 
     .gallery {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
       gap: 2.5rem;
       margin-top: 3rem;
     }
@@ -340,7 +344,7 @@
     .card-img-wrapper {
       position: relative;
       overflow: hidden;
-      height: 400px;
+      height: 420px;
       border-radius: 12px;
       margin-bottom: 1.5rem;
     }
@@ -369,7 +373,7 @@
       display: inline-block;
       width: 100%;
       text-align: center;
-      padding: 0.8rem 0;
+      padding: 0.9rem 0;
       background: transparent;
       border: 1px solid var(--border-color);
       color: var(--text-color);
@@ -391,22 +395,18 @@
 
     footer {
       text-align: center;
-      padding: 4rem 2rem 3rem 2rem;
+      padding: 5rem 2rem 3rem 2rem;
       margin-top: 6rem;
       border-top: 1px solid var(--border-color);
       color: var(--text-muted);
       font-size: 0.85rem;
     }
 
-    @media (max-width: 950px) {
+    @media (max-width: 900px) {
       .about-main { grid-template-columns: 1fr; }
-      .pricing-row {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-        padding: 2rem;
-      }
-      .pricing-row::before { width: 100%; height: 4px; }
-      .pricing-row:hover { transform: translateY(-4px); }
+      .hero-title { font-size: 2.8rem; }
+      .pricing-title { font-size: 2.2rem; }
+      .nav-links { gap: 1rem; }
     }
   </style>
 </head>
@@ -414,7 +414,7 @@
 
   <div class="bg-canvas" id="bgCanvas"></div>
 
-  <!-- NAWIGACJA -->
+  <!-- NAVBAR ZE WSZYSTKIMI ODNOŚNIKAMI -->
   <header>
     <nav>
       <div class="logo" onclick="switchPage('tattoo')">AETHERIA<span>.</span></div>
@@ -422,10 +422,12 @@
         <li><a onclick="switchPage('tattoo')">Tatuaże</a></li>
         <li><a onclick="switchPage('art')">Malarstwo</a></li>
         
+        <!-- Linki dla Tatuażu -->
         <li class="btn-tattoo-only"><a href="#o-mnie-tattoo">O Mnie</a></li>
         <li class="btn-tattoo-only"><a href="#portfolio-tattoo">Portfolio</a></li>
         <li class="btn-tattoo-only"><a href="#cennik-tattoo">Cennik</a></li>
 
+        <!-- Linki dla Art -->
         <li class="btn-art-only"><a href="#o-mnie-art">O Mnie</a></li>
         <li class="btn-art-only"><a href="#kolekcja-art">Dzieła</a></li>
 
@@ -454,15 +456,17 @@
           <h2>Mistrzostwo Formy & Detalu</h2>
           <p>Aetheria to autorska przestrzeń tworzona przez dyplomowaną artystkę Akademii Sztuk Pięknych. Łącząc wiedzę z zakresu anatomii człowieka i klasycznego malarstwa, tworzę projekty będące bezkompromisowymi dziełami sztuki.</p>
           <p>Odrzucamy masowe szablony i chwilowe trendy. Każda sesja to indywidualny proces twórczy, dopasowany bezpośrednio do struktury Twojego ciała.</p>
-          <a href="#cennik-tattoo" class="action-btn" style="margin-top: 1rem;">Sprawdź Cennik & Sesje ↓</a>
+          <a href="https://instagram.com/twój_profil" target="_blank" class="action-btn" style="margin-top: 1rem;">
+            Konsultacja Indywidualna ↗
+          </a>
         </div>
       </div>
     </section>
 
     <!-- PORTFOLIO -->
     <div id="portfolio-tattoo" class="reveal" style="margin-top: 6rem;">
-      <span class="section-tag" style="text-align: center;">Wybrane Prace</span>
-      <h2 style="font-family: var(--font-title); font-size: 3rem; text-align: center; margin-bottom: 2rem;">Galeria Realizacji</h2>
+      <span class="section-tag" style="text-align: center;">Portfolio</span>
+      <h2 style="font-family: var(--font-title); font-size: 3rem; text-align: center; margin-bottom: 2rem;">Wybrane Realizacje</h2>
       
       <div class="gallery">
         <div class="glass-card tilt-card">
@@ -494,47 +498,54 @@
       </div>
     </div>
 
-    <!-- CENNIK -->
+    <!-- CENNIK KARTY -->
     <section id="cennik-tattoo" class="pricing-section reveal">
       <span class="section-tag">Inwestycja & Rezerwacja</span>
-      <h2 class="pricing-title">Przejrzysta Oferta Sesyjna</h2>
-      <p style="color: var(--text-muted); font-size: 1.1rem; max-width: 750px;">Indywidualne podejście do każdego projektu, bez ukrytych kosztów.</p>
+      <h2 class="pricing-title">Przejrzysty System Sesyjny</h2>
+      <p style="color: var(--text-muted); font-size: 1.1rem; max-width: 750px;">Wszystkie projekty wyceniane są w oparciu o czas trwania sesji oraz stopień skomplikowania wzoru. Bez ukrytych opłat.</p>
 
-      <div class="pricing-list-container">
-        <div class="pricing-row tilt-card">
+      <div class="pricing-grid">
+        <div class="glass-card pricing-card tilt-card">
           <div>
-            <div class="pricing-row-title">Fine-Line Micro</div>
-            <div style="color: var(--accent-color); font-size: 0.8rem; font-weight: 600;">DO 7 CM</div>
+            <h3>Fine-Line Micro</h3>
+            <div class="pricing-price">od 500 PLN</div>
+            <ul class="pricing-features">
+              <li>Drobne wzory do 7 cm</li>
+              <li>Precyzyjny line-work / Dotwork</li>
+              <li>Sterylny zestaw pielęgnacyjny w cenie</li>
+              <li>Bezpłatna korekta do 3 miesięcy</li>
+            </ul>
           </div>
-          <div class="pricing-row-desc">Drobne motywy botaniczne, napisy, mikro-detal igłą 0.18mm.</div>
-          <div class="pricing-row-price">500 PLN</div>
-          <div>
-            <a href="https://instagram.com/twój_profil" target="_blank" class="buy-btn">Rezerwuj ↗</a>
-          </div>
+          <a href="https://instagram.com/twój_profil" target="_blank" class="buy-btn">Zapytaj o Termin</a>
         </div>
 
-        <div class="pricing-row pricing-row-featured tilt-card">
+        <div class="glass-card pricing-card tilt-card" style="border-color: var(--accent-color);">
           <div>
-            <div class="pricing-row-title">Sesja Całodniowa</div>
-            <div style="color: var(--accent-color); font-size: 0.8rem; font-weight: 600;">PREMIUM FULL-DAY</div>
+            <span class="section-tag">Najczęściej Wybierane</span>
+            <h3>Sesja Dniowa (Full Day)</h3>
+            <div class="pricing-price">2200 PLN</div>
+            <ul class="pricing-features">
+              <li>Pełny dzień pracy w studio (6-8 godzin)</li>
+              <li>Dedykowany, duży projekt autorski</li>
+              <li>Ekskluzywna opieka potreningowa</li>
+              <li>Poczęstunek i napoje w strefie VIP</li>
+            </ul>
           </div>
-          <div class="pricing-row-desc">6-8 godzin indywidualnej pracy nad autorskim projektami na przedramię, ramię lub udo.</div>
-          <div class="pricing-row-price">2200 PLN</div>
-          <div>
-            <a href="https://instagram.com/twój_profil" target="_blank" class="buy-btn" style="background: var(--accent-color); color: var(--bg-color);">Rezerwuj ↗</a>
-          </div>
+          <a href="https://instagram.com/twój_profil" target="_blank" class="buy-btn" style="background: var(--accent-color); color: var(--bg-color);">Rezerwuj Sesję</a>
         </div>
 
-        <div class="pricing-row tilt-card">
+        <div class="glass-card pricing-card tilt-card">
           <div>
-            <div class="pricing-row-title">Duże Kompozycje</div>
-            <div style="color: var(--accent-color); font-size: 0.8rem; font-weight: 600;">PLECY / RĘKAW</div>
+            <h3>Projekt Wielosesyjny</h3>
+            <div class="pricing-price">Wycena Indywidualna</div>
+            <ul class="pricing-features">
+              <li>Kompozycje na całe plecy / rękawy</li>
+              <li>Wizualizacja 3D przed przystąpieniem do pracy</li>
+              <li>Elastyczny harmonogram płatności</li>
+              <li>Priorytetowy dobór terminów</li>
+            </ul>
           </div>
-          <div class="pricing-row-desc">Projekty wielosesyjne. Dedykowana wizualizacja 3D i indywidualny kosztorys.</div>
-          <div class="pricing-row-price">Wycena</div>
-          <div>
-            <a href="https://instagram.com/twój_profil" target="_blank" class="buy-btn">Konsultacja ↗</a>
-          </div>
+          <a href="https://instagram.com/twój_profil" target="_blank" class="buy-btn">Umów Konsultację</a>
         </div>
       </div>
     </section>
@@ -553,9 +564,11 @@
         </div>
         <div class="about-text">
           <h2>Malarstwo Sztalugowe</h2>
-          <p>Prace tworzone w cichej pracowni stanowią dopełnienie mojej ekspresji twórczej. Wykorzystuję płótna lniane najwyższej gramatury oraz autorskie mikstury struktur mineralnych.</p>
-          <p>Każdy obraz sprzedawany jest jako oryginalny egzemplarz niepowtarzalny (1/1) z Certyfikatem Autentyczności.</p>
-          <a href="#kolekcja-art" class="action-btn" style="margin-top: 1rem;">Zobacz Dostępne Dzieła ↓</a>
+          <p>Prace tworzone w cichej pracowni stanowią dopełnienie mojej ekspresji twórczej. Wykorzystuję płótna lniane najwyższej gramatury, autorskie mikstury struktur mineralnych oraz szlachetne pigmenty olejowe.</p>
+          <p>Każdy obraz sprzedawany jest jako oryginalny egzemplarz niepowtarzalny (1/1) wraz z fizycznym Certyfikatem Autentyczności sygnowanym przez artystkę.</p>
+          <a href="https://vinted.pl/twój_profil" target="_blank" class="action-btn" style="margin-top: 1rem;">
+            Oficjalny Sklep Vinted ↗
+          </a>
         </div>
       </div>
     </section>
@@ -571,7 +584,7 @@
             <img src="https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=600&q=80" alt="Abstract Canvas" class="card-img">
           </div>
           <h3 class="card-title">Eteryczny Horyzont</h3>
-          <p class="card-desc">Technika własna, Akryl & Złoto 24K | 120 x 90 cm</p>
+          <p class="card-desc">Technika własna, Akryl & Złoto 24K na płótnie | 120 x 90 cm</p>
           <a href="https://vinted.pl/twój_profil" target="_blank" class="buy-btn">Kup na Vinted ↗</a>
         </div>
 
@@ -657,8 +670,8 @@
 
     const bgCanvas = document.getElementById('bgCanvas');
     window.addEventListener('mousemove', (e) => {
-      const x = (e.clientX / window.innerWidth - 0.5) * 15;
-      const y = (e.clientY / window.innerHeight - 0.5) * 15;
+      const x = (e.clientX / window.innerWidth - 0.5) * 20;
+      const y = (e.clientY / window.innerHeight - 0.5) * 20;
       bgCanvas.style.transform = `translate(${x}px, ${y}px) scale(1.05)`;
     });
 
@@ -671,14 +684,14 @@
         const centerX = rect.width / 2;
         const centerY = rect.height / 2;
 
-        const rotateX = (y - centerY) / 25;
-        const rotateY = (centerX - x) / 25;
+        const rotateX = (y - centerY) / 20;
+        const rotateY = (centerX - x) / 20;
 
-        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
       });
 
       card.addEventListener('mouseleave', () => {
-        card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg)`;
+        card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)`;
       });
     });
   </script>
