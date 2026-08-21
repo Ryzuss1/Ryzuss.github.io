@@ -7,15 +7,16 @@
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <!-- Uwaga: Czcionka Amoria jest załadowana stylami zastępczymi/seraph dla efektu wysokiej elegancji nagłówków -->
 
   <style>
     :root {
       --bg-dark: #030406;
       --accent-neon: #e6c594;
       --glass-border: rgba(230, 197, 148, 0.25);
-      --font-title: 'Syne', sans-serif;
-      --font-body: 'Space Grotesk', sans-serif;
+      --font-title: 'Amoria', 'Syne', serif;
+      --font-body: 'Lato', sans-serif;
       --card-clip: polygon(0 0, 100% 0, 98% 100%, 0% 100%);
       --btn-clip: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
     }
@@ -113,16 +114,16 @@
 
     .brand-top {
       font-family: var(--font-title);
-      font-size: 1.25rem;
-      font-weight: 800;
+      font-size: 1.35rem;
+      font-weight: 700;
       letter-spacing: 3px;
       color: #fff;
     }
 
     .brand-bottom {
       font-family: var(--font-body);
-      font-size: 0.85rem;
-      font-weight: 400;
+      font-size: 0.8rem;
+      font-weight: 300;
       letter-spacing: 6px;
       color: #fff;
       margin-left: 2px;
@@ -143,7 +144,7 @@
       color: #fff;
       padding: 0.4rem 1rem;
       font-family: var(--font-body);
-      font-size: 0.7rem;
+      font-size: 0.75rem;
       font-weight: 700;
       letter-spacing: 1px;
       text-transform: uppercase;
@@ -169,6 +170,7 @@
       text-decoration: none;
       clip-path: var(--btn-clip);
       box-shadow: 0 0 15px rgba(255,255,255,0.1);
+      font-family: var(--font-body);
     }
 
     .action-link:hover {
@@ -235,10 +237,11 @@
 
     .hero-title {
       font-family: var(--font-title);
-      font-size: clamp(2.2rem, 5vw, 4rem);
-      line-height: 1.05;
+      font-size: clamp(2.5rem, 5vw, 4.2rem);
+      line-height: 1.1;
       text-transform: uppercase;
       margin-bottom: 1rem;
+      letter-spacing: 1px;
     }
 
     .hero-title span {
@@ -252,10 +255,11 @@
     }
 
     .hero-desc {
-      font-size: 0.95rem;
+      font-size: 1rem;
       color: #8b95a5;
       margin-bottom: 2rem;
       line-height: 1.6;
+      font-weight: 300;
     }
 
     .about-section {
@@ -285,9 +289,10 @@
 
     .about-text h2 {
       font-family: var(--font-title);
-      font-size: 1.8rem;
+      font-size: 2rem;
       margin-bottom: 1rem;
       text-transform: uppercase;
+      letter-spacing: 1px;
     }
 
     .about-text p {
@@ -295,6 +300,7 @@
       line-height: 1.6;
       margin-bottom: 1rem;
       font-size: 0.95rem;
+      font-weight: 300;
     }
 
     .wild-card {
@@ -389,22 +395,24 @@
 
     .card-title {
       font-family: var(--font-title);
-      font-size: 1.25rem;
+      font-size: 1.4rem;
       margin-bottom: 0.4rem;
+      letter-spacing: 0.5px;
     }
 
     .card-desc {
       color: #8b95a5;
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       margin-bottom: 1.2rem;
+      font-weight: 300;
     }
 
     .price-tag {
       font-family: var(--font-title);
-      font-size: 1.5rem;
+      font-size: 1.6rem;
       color: var(--accent-neon);
       margin-bottom: 1rem;
-      font-weight: 800;
+      font-weight: 700;
     }
 
     .info-section {
@@ -418,17 +426,19 @@
 
     .info-section h3 {
       font-family: var(--font-title);
-      font-size: 1.4rem;
+      font-size: 1.6rem;
       margin-bottom: 1.2rem;
       color: var(--accent-neon);
       text-transform: uppercase;
+      letter-spacing: 1px;
     }
 
     .info-section p, .info-section li {
       color: #909bb0;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       line-height: 1.6;
       margin-bottom: 0.8rem;
+      font-weight: 300;
     }
 
     .info-section ul {
@@ -454,18 +464,19 @@
     .faq-question {
       padding: 1.1rem 1.3rem;
       font-family: var(--font-title);
-      font-size: 1rem;
+      font-size: 1.15rem;
       color: #fff;
       cursor: pointer;
       display: flex;
       justify-content: space-between;
       align-items: center;
       user-select: none;
+      letter-spacing: 0.5px;
     }
 
     .faq-question::after {
       content: '+';
-      font-size: 1.3rem;
+      font-size: 1.4rem;
       color: var(--accent-neon);
       font-weight: 700;
       transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
@@ -492,8 +503,9 @@
     .faq-answer-content {
       padding: 0 1.3rem 1.3rem 1.3rem;
       color: #909bb0;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       line-height: 1.6;
+      font-weight: 300;
     }
 
     /* COOKIES & RODO BANNER */
@@ -520,9 +532,10 @@
       transform: translateY(0);
     }
     .cookie-text {
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       color: #909bb0;
       line-height: 1.5;
+      font-weight: 300;
     }
     .cookie-text a {
       color: var(--accent-neon);
@@ -541,6 +554,7 @@
       cursor: pointer;
       border: none;
       clip-path: var(--btn-clip);
+      font-family: var(--font-body);
     }
     .cookie-btn.accept {
       background: var(--accent-neon);
@@ -558,9 +572,10 @@
       border-top: 1px solid var(--glass-border);
       text-align: center;
       color: #606b7d;
-      font-size: 0.75rem;
+      font-size: 0.8rem;
       letter-spacing: 2px;
       background: rgba(3, 4, 6, 0.5);
+      font-weight: 300;
     }
 
     /* OPTYMALIZACJA DLA WYSOKICH ROZDZIELCZOŚCI (2K, 4K, UltraWide) */
@@ -595,7 +610,7 @@
       .tab-btn { flex: 1; text-align: center; padding: 0.5rem; }
       main { padding-top: 9.5rem; }
       .hero, .about-section { grid-template-columns: 1fr; padding: 1.2rem; gap: 1.5rem; }
-      .hero-title { font-size: 2.2rem; }
+      .hero-title { font-size: 2.3rem; }
       #cookie-banner { left: 10px; right: 10px; bottom: 10px; }
     }
   </style>
@@ -632,9 +647,9 @@
         </div>
 
         <div class="wild-card">
-          <h3 style="font-family: var(--font-title); font-size: 1.3rem; margin-bottom: 0.8rem;">Lokalizacja</h3>
-          <p style="color: #8b95a5; margin-bottom: 1.2rem; font-size: 0.9rem;">Katowice, ul. Poniatowskiego 17/3 (studio Bo Mogę). Parking płatny pon-pt do 17:00.</p>
-          <div style="border-left: 2px solid var(--accent-neon); padding-left: 0.8rem; font-weight: 700; font-size: 0.85rem;">
+          <h3 style="font-family: var(--font-title); font-size: 1.4rem; margin-bottom: 0.8rem;">Lokalizacja</h3>
+          <p style="color: #8b95a5; margin-bottom: 1.2rem; font-size: 0.95rem; font-weight: 300;">Katowice, ul. Poniatowskiego 17/3 (studio Bo Mogę). Parking płatny pon-pt do 17:00.</p>
+          <div style="border-left: 2px solid var(--accent-neon); padding-left: 0.8rem; font-weight: 700; font-size: 0.85rem; font-family: var(--font-body);">
             INDYWIDUALNE PODEJŚCIE
           </div>
         </div>
@@ -664,7 +679,7 @@
         </ul>
       </section>
 
-      <h2 style="font-family: var(--font-title); font-size: 1.6rem; margin-bottom: 1.5rem;">Przykładowe Realizacje</h2>
+      <h2 style="font-family: var(--font-title); font-size: 1.8rem; margin-bottom: 1.5rem; letter-spacing: 1px;">Przykładowe Realizacje</h2>
       
       <div class="grid-3">
         <div class="card-item"><img src="fddd8b45-fa11-4fa2-88ed-393dd84bed07.jpg" alt="Tatuaż" class="card-img"></div>
@@ -756,9 +771,9 @@
         </div>
 
         <div class="wild-card">
-          <h3 style="font-family: var(--font-title); font-size: 1.3rem; margin-bottom: 0.8rem;">Dostępność</h3>
-          <p style="color: #8b95a5; margin-bottom: 1.2rem; font-size: 0.9rem;">Każdy obraz malowany jest na płótnie z dbałością o detale. Bezpieczna wysyłka i zakupy przez Vinted.</p>
-          <div style="border-left: 2px solid var(--accent-neon); padding-left: 0.8rem; font-weight: 700; font-size: 0.85rem;">
+          <h3 style="font-family: var(--font-title); font-size: 1.4rem; margin-bottom: 0.8rem;">Dostępność</h3>
+          <p style="color: #8b95a5; margin-bottom: 1.2rem; font-size: 0.95rem; font-weight: 300;">Każdy obraz malowany jest na płótnie z dbałością o detale. Bezpieczna wysyłka i zakupy przez Vinted.</p>
+          <div style="border-left: 2px solid var(--accent-neon); padding-left: 0.8rem; font-weight: 700; font-size: 0.85rem; font-family: var(--font-body);">
             ORYGINALNE DZIEŁA SZTUKI
           </div>
         </div>
@@ -776,7 +791,7 @@
         </div>
       </section>
 
-      <h2 style="font-family: var(--font-title); font-size: 1.6rem; margin-bottom: 1.5rem;">Galeria Obrazów</h2>
+      <h2 style="font-family: var(--font-title); font-size: 1.8rem; margin-bottom: 1.5rem; letter-spacing: 1px;">Galeria Obrazów</h2>
 
       <div class="grid-3">
         <div class="art-card-item">
