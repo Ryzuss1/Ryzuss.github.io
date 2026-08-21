@@ -186,7 +186,7 @@
       box-shadow: 0 0 25px var(--accent-neon);
     }
 
-    /* GŁÓWNY KONTENER – szerokość 1100px */
+    /* GŁÓWNY KONTENER */
     main {
       padding-top: 8rem;
       max-width: 1100px;
@@ -215,23 +215,6 @@
         transform: translateY(0) scale(1); 
         filter: blur(0);
       }
-    }
-
-    .page-view.active .hero > *,
-    .page-view.active .about-section,
-    .page-view.active .info-section,
-    .page-view.active .grid-3 {
-      animation: staggerUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
-    }
-
-    .page-view.active .hero > *:nth-child(1) { animation-delay: 0.1s; }
-    .page-view.active .hero > *:nth-child(2) { animation-delay: 0.2s; }
-    .page-view.active .about-section { animation-delay: 0.3s; }
-    .page-view.active .info-section { animation-delay: 0.4s; }
-
-    @keyframes staggerUp {
-      from { opacity: 0; transform: translateY(25px); }
-      to { opacity: 1; transform: translateY(0); }
     }
 
     .hero {
@@ -269,6 +252,7 @@
       font-weight: 300;
     }
 
+    /* SEKCJA O MNIE Z KARUZELĄ */
     .about-section {
       display: grid;
       grid-template-columns: 0.9fr 1.1fr;
@@ -284,14 +268,82 @@
 
     .about-img-box {
       width: 100%;
+      position: relative;
     }
 
-    .about-img {
+    .carousel-container {
+      position: relative;
       width: 100%;
-      height: auto;
-      display: block;
-      filter: contrast(120%) grayscale(30%);
+      overflow: hidden;
       border: 1px solid var(--glass-border);
+      background: #000;
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      width: 100%;
+    }
+
+    .carousel-slide {
+      min-width: 100%;
+      flex: 0 0 100%;
+    }
+
+    .carousel-slide img {
+      width: 100%;
+      height: 540px; /* Zwiększona wysokość, aby zdjęcia były wyższe i mniej przycięte */
+      object-fit: cover;
+      display: block;
+      filter: contrast(120%) grayscale(15%);
+      cursor: pointer;
+    }
+
+    /* PRZYCISKI I WSKAŹNIKI KARUZELI */
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(3, 4, 6, 0.7);
+      border: 1px solid var(--glass-border);
+      color: #fff;
+      padding: 0.6rem 0.9rem;
+      cursor: pointer;
+      z-index: 10;
+      font-size: 1rem;
+      backdrop-filter: blur(5px);
+      transition: background 0.3s ease, border-color 0.3s ease;
+    }
+
+    .carousel-btn:hover {
+      background: var(--accent-neon);
+      color: #000;
+      border-color: var(--accent-neon);
+    }
+
+    .carousel-btn.prev { left: 10px; }
+    .carousel-btn.next { right: 10px; }
+
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.3);
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .dot.active {
+      background: var(--accent-neon);
+      transform: scale(1.3);
     }
 
     .about-text h2 {
@@ -575,7 +627,7 @@
       border: 1px solid var(--glass-border);
     }
 
-    /* LIGHTBOX CSS */
+    /* LIGHTBOX */
     .lightbox {
       display: none;
       position: fixed;
@@ -632,7 +684,6 @@
 </head>
 <body class="mode-tattoo">
 
-  <!-- PŁYNNE, ŻYWE TŁO AURORA -->
   <div class="portal-bg"></div>
   <div class="grid-mesh"></div>
 
@@ -670,16 +721,29 @@
         </div>
       </section>
 
-      <!-- SEKCJA O MNIE -->
+      <!-- SEKCJA O MNIE Z KARUZELĄ -->
       <section class="about-section">
         <div class="about-img-box">
-          <img src="fddd8b45-fa11-4fa2-88ed-393dd84bed07.jpg" alt="O mnie" class="about-img">
+          <div class="carousel-container">
+            <button class="carousel-btn prev" onclick="moveSlide(-1)">&#10094;</button>
+            <div class="carousel-track" id="about-carousel">
+              <div class="carousel-slide"><img src="DSCF0946.jpeg" alt="Rydz" class="carousel-img"></div>
+              <div class="carousel-slide"><img src="IMG_8464.jpeg" alt="Rydz" class="carousel-img"></div>
+              <div class="carousel-slide"><img src="IMG_8482.jpeg" alt="Rydz" class="carousel-img"></div>
+            </div>
+            <button class="carousel-btn next" onclick="moveSlide(1)">&#10095;</button>
+          </div>
+          <div class="carousel-dots" id="carousel-dots">
+            <button class="dot active" onclick="currentSlide(0)"></button>
+            <button class="dot" onclick="currentSlide(1)"></button>
+            <button class="dot" onclick="currentSlide(2)"></button>
+          </div>
         </div>
         <div class="about-text">
           <h2>O mnie</h2>
           <p>Cześć, z tej strony Rydz!</p>
           <p>Jestem tatuatorką z Katowic i zamieniam codzienność w kolorowe dziarki. Jeżeli szukasz osoby, z którą można pogadać o wszystkim albo pomilczeć w komfortowej atmosferze - to właśnie ją znalazłeś. Przede wszystkim dbam o komfort swoich klientów, więc nie obawiaj się zadawać pytań. Jestem po to, żeby na nie odpowiedzieć i rozwiać Twoje wątpliwości.</p>
-          <p>No dobra, ale jakie tatuaże właściwie wykonuję?<br>Najbardziej kocham kolorowe dziarki i to właśnie ich wykonuję najwięcej. Ale nie samym kolorem człowiek żyje - równie chętnie tworzę też czarne tatuaże, abstrakcje czy napisy. Zjedź niżej, żeby zobaczyć moje realizacje i sprawdź, w jakim klimacie mogłabym stworzyć coś dla Ciebie.</p>
+          <p>No dobra, ale jakie tatuaże właściwie wykonuję?<br>Najbardziej kocham kolorowe dziarki i to właśnie ich wykonuję najwięcej. Nhưng nie samym kolorem człowiek żyje - równie chętnie tworzę też czarne tatuaże, abstrakcje czy napisy. Zjedź niżej, żeby zobaczyć moje realizacje i sprawdź, w jakim klimacie mogłabym stworzyć coś dla Ciebie.</p>
         </div>
       </section>
 
@@ -698,7 +762,6 @@
       <h2 style="font-family: var(--font-title); font-size: 2.2rem; margin-bottom: 1.5rem; letter-spacing: 1px;">Przykładowe Realizacje <span style="font-size: 1rem; color: #8b95a5; font-family: var(--font-body); font-weight: 300; letter-spacing: 0;">(kliknij, aby powiększyć)</span></h2>
       
       <div class="grid-3">
-        <div class="card-item"><img src="fddd8b45-fa11-4fa2-88ed-393dd84bed07.jpg" alt="Tatuaż" class="card-img gallery-img"></div>
         <div class="card-item"><img src="4290f03b-3eaa-4124-94a1-1c18c924238d.jpg" alt="Tatuaż" class="card-img gallery-img"></div>
         <div class="card-item"><img src="4306c7da-94ad-46a7-a31d-d7ad55b9233b.jpg" alt="Tatuaż" class="card-img gallery-img"></div>
         <div class="card-item"><img src="7e62d13c-8061-4f51-be68-3a68561917cc.jpg" alt="Tatuaż" class="card-img gallery-img"></div>
@@ -798,7 +861,20 @@
       <!-- SEKCJA O MNIE -->
       <section class="about-section">
         <div class="about-img-box">
-          <img src="94931951-bcdb-4a9f-809a-69933cdd507a.jpg" alt="Malarstwo o mnie" class="about-img">
+          <div class="carousel-container">
+            <button class="carousel-btn prev" onclick="moveSlide(-1)">&#10094;</button>
+            <div class="carousel-track" id="about-carousel-art">
+              <div class="carousel-slide"><img src="DSCF0946.jpg" alt="Malarstwo" class="carousel-img"></div>
+              <div class="carousel-slide"><img src="IMG_8464.jpg" alt="Malarstwo" class="carousel-img"></div>
+              <div class="carousel-slide"><img src="IMG_8482.jpg" alt="Malarstwo" class="carousel-img"></div>
+            </div>
+            <button class="carousel-btn next" onclick="moveSlide(1)">&#10095;</button>
+          </div>
+          <div class="carousel-dots" id="carousel-dots-art">
+            <button class="dot active" onclick="currentSlide(0)"></button>
+            <button class="dot" onclick="currentSlide(1)"></button>
+            <button class="dot" onclick="currentSlide(2)"></button>
+          </div>
         </div>
         <div class="about-text">
           <h2>O malarstwie</h2>
@@ -835,7 +911,7 @@
     </div>
   </div>
 
-  <!-- LIGHTBOX / POWIĘKSZENIE ZDJĘCIA -->
+  <!-- LIGHTBOX -->
   <div id="lightbox" class="lightbox" onclick="closeLightbox()">
     <img id="lightbox-img" src="" alt="Powiększone zdjęcie">
   </div>
@@ -859,6 +935,8 @@
       } else if (consent === 'accepted') {
         initTracking(); 
       }
+
+      startCarouselTimer();
     });
 
     function acceptCookies() {
@@ -925,6 +1003,53 @@
       }
     }
 
+    // LOGIKA KARUZELI
+    let slideIndex = 0;
+    const totalSlides = 3; // Zmienione z 4 na 3, ponieważ usunięto jedno zdjęcie
+    let carouselInterval;
+
+    function updateCarousel() {
+      const trackTattoo = document.getElementById('about-carousel');
+      const trackArt = document.getElementById('about-carousel-art');
+      const dotsTattoo = document.querySelectorAll('#carousel-dots .dot');
+      const dotsArt = document.querySelectorAll('#carousel-dots-art .dot');
+
+      const offset = -slideIndex * 100;
+      if (trackTattoo) trackTattoo.style.transform = `translateX(${offset}%)`;
+      if (trackArt) trackArt.style.transform = `translateX(${offset}%)`;
+
+      dotsTattoo.forEach((dot, idx) => {
+        dot.classList.toggle('active', idx === slideIndex);
+      });
+      dotsArt.forEach((dot, idx) => {
+        dot.classList.toggle('active', idx === slideIndex);
+      });
+    }
+
+    function moveSlide(n) {
+      slideIndex = (slideIndex + n + totalSlides) % totalSlides;
+      updateCarousel();
+      resetCarouselTimer();
+    }
+
+    function currentSlide(n) {
+      slideIndex = n;
+      updateCarousel();
+      resetCarouselTimer();
+    }
+
+    function startCarouselTimer() {
+      carouselInterval = setInterval(() => {
+        slideIndex = (slideIndex + 1) % totalSlides;
+        updateCarousel();
+      }, 10000); // zmiana co 10 sekund
+    }
+
+    function resetCarouselTimer() {
+      clearInterval(carouselInterval);
+      startCarouselTimer();
+    }
+
     function openLightbox(src) {
       const lightbox = document.getElementById('lightbox');
       const lightboxImg = document.getElementById('lightbox-img');
@@ -939,7 +1064,7 @@
       setTimeout(() => lightbox.style.display = 'none', 300);
     }
 
-    document.querySelectorAll('.card-item img.gallery-img').forEach(img => {
+    document.querySelectorAll('.card-item img.gallery-img, .carousel-img').forEach(img => {
       img.addEventListener('click', (e) => {
         openLightbox(e.target.src);
       });
