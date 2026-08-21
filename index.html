@@ -3,697 +3,489 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AETHERIA — Art & Tattoo Studio</title>
+  <title>AETHERIA — Cyber-Occult Tattoo & Art Studio</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --bg-color: #0b0d12;
-      --text-color: #f2f4f8;
-      --text-muted: #8c96a6;
-      --accent-color: #d4af37;
-      --accent-glow: rgba(212, 175, 55, 0.25);
-      --card-bg: rgba(18, 22, 31, 0.65);
-      --nav-bg: rgba(11, 13, 18, 0.85);
-      --border-color: rgba(212, 175, 55, 0.18);
-      --font-title: 'Cinzel', serif;
-      --font-body: 'Plus Jakarta Sans', sans-serif;
-      --bg-image: url('https://images.unsplash.com/photo-1598371839696-5c5bb00bdc28?auto=format&fit=crop&w=1920&q=80');
-      --transition-speed: 0.6s;
+      /* TATTOO THEME: Złoto i Głęboki Mrok */
+      --bg-dark: #030406;
+      --accent-neon: #e6c594;
+      --accent-glow: rgba(230, 197, 148, 0.3);
+      --glass-border: rgba(230, 197, 148, 0.25);
+      --font-title: 'Syne', sans-serif;
+      --font-body: 'Space Grotesk', sans-serif;
+      --card-clip: polygon(0 0, 100% 0, 95% 100%, 0% 100%);
+      --btn-clip: polygon(12px 0, 100% 0, calc(100% - 12px) 100%, 0 100%);
     }
 
-    body.theme-art {
-      --bg-color: #080d1a;
-      --text-color: #f0f4fa;
-      --text-muted: #7f90ab;
-      --accent-color: #4a90e2;
-      --accent-glow: rgba(74, 144, 226, 0.25);
-      --card-bg: rgba(15, 25, 45, 0.65);
-      --nav-bg: rgba(8, 13, 26, 0.85);
-      --border-color: rgba(74, 144, 226, 0.2);
-      --bg-image: url('https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=1920&q=80');
-    }
-
-    html {
-      scroll-behavior: smooth;
+    body.mode-art {
+      /* ART THEME: Kosmiczny Szafir i Neon */
+      --accent-neon: #00f0ff;
+      --accent-glow: rgba(0, 240, 255, 0.3);
+      --glass-border: rgba(0, 240, 255, 0.25);
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+      transition: background 0.5s ease, border-color 0.5s ease, color 0.3s ease, transform 0.3s ease;
     }
 
     body {
-      background-color: var(--bg-color);
-      color: var(--text-color);
+      background-color: var(--bg-dark);
+      color: #f0f3f8;
       font-family: var(--font-body);
-      transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+      min-height: 100vh;
       overflow-x: hidden;
-      line-height: 1.6;
+      position: relative;
     }
 
-    /* BACKGROUND PARALLAX */
-    .bg-canvas {
+    /* CYBERNETYCZNE TŁO */
+    .portal-bg {
       position: fixed;
-      top: 0; left: 0;
-      width: 110%; height: 110%;
-      background-image: radial-gradient(circle at 50% 30%, transparent 20%, var(--bg-color) 85%), var(--bg-image);
-      background-size: cover;
-      background-position: center;
-      opacity: 0.25;
+      inset: 0;
+      background: radial-gradient(circle at 70% 30%, var(--accent-glow) 0%, transparent 60%);
       z-index: -2;
-      filter: contrast(120%) saturate(110%);
-      transition: background-image var(--transition-speed) ease, opacity var(--transition-speed) ease;
-      will-change: transform;
+      pointer-events: none;
     }
 
-    /* HEADER & NAV */
+    .grid-mesh {
+      position: fixed;
+      inset: 0;
+      background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      z-index: -1;
+      opacity: 0.5;
+    }
+
+    /* NAV BAR */
     header {
       position: fixed;
-      top: 0; width: 100%;
-      background: var(--nav-bg);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      z-index: 1000;
-      border-bottom: 1px solid var(--border-color);
-      transition: all var(--transition-speed) ease;
-    }
-
-    nav {
-      max-width: 1300px;
-      margin: 0 auto;
+      top: 0; left: 0; width: 100%;
+      padding: 1.2rem 3rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1.2rem 2rem;
+      z-index: 1000;
+      backdrop-filter: blur(20px);
+      background: rgba(3, 4, 6, 0.85);
+      border-bottom: 1px solid var(--glass-border);
     }
 
-    .logo {
+    .brand {
       font-family: var(--font-title);
       font-size: 1.8rem;
-      font-weight: 700;
-      letter-spacing: 3px;
-      color: var(--text-color);
+      font-weight: 800;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #fff;
       cursor: pointer;
+      text-shadow: 0 0 15px var(--accent-neon);
     }
 
-    .logo span { color: var(--accent-color); }
-
-    .nav-links {
-      list-style: none;
+    .switcher-box {
       display: flex;
-      gap: 2rem;
-      align-items: center;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--glass-border);
+      padding: 4px;
+      border-radius: 40px;
     }
 
-    .nav-links a {
-      color: var(--text-color);
-      text-decoration: none;
+    .tab-btn {
+      border: none;
+      background: transparent;
+      color: #fff;
+      padding: 0.6rem 1.8rem;
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      border-radius: 30px;
+    }
+
+    .tab-btn.active {
+      background: var(--accent-neon);
+      color: #000;
+      box-shadow: 0 0 20px var(--accent-neon);
+    }
+
+    .action-link {
+      display: inline-block;
+      padding: 0.8rem 2rem;
+      background: var(--accent-neon);
+      color: #000;
+      font-weight: 700;
       font-size: 0.8rem;
       letter-spacing: 2px;
       text-transform: uppercase;
-      font-weight: 600;
-      position: relative;
-      padding: 0.4rem 0;
-      cursor: pointer;
-      transition: color 0.3s ease;
+      text-decoration: none;
+      clip-path: var(--btn-clip);
+      box-shadow: 0 0 15px var(--accent-neon);
     }
 
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 0;
-      width: 0%; height: 2px;
-      background: var(--accent-color);
-      transition: width 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-      box-shadow: 0 0 10px var(--accent-color);
+    .action-link:hover {
+      transform: scale(1.05) rotate(-1deg);
+      background: #fff;
     }
 
-    .nav-links a:hover::after { width: 100%; }
-
-    .action-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
-      border: 1px solid var(--border-color);
-      background: rgba(255, 255, 255, 0.03);
-      padding: 0.6rem 1.4rem;
-      border-radius: 50px;
-      color: var(--accent-color) !important;
-      font-weight: 600 !important;
-      position: relative;
-      overflow: hidden;
-      backdrop-filter: blur(10px);
-      transition: all 0.4s ease !important;
-    }
-
-    .action-btn:hover {
-      border-color: var(--accent-color);
-      box-shadow: 0 0 25px var(--accent-glow);
-      transform: translateY(-2px);
-    }
-
-    body.theme-tattoo .btn-art-only { display: none !important; }
-    body.theme-art .btn-tattoo-only { display: none !important; }
-
-    /* LAYOUT & ANIMATIONS */
-    .page {
-      display: none;
-      min-height: 100vh;
-      padding: 9rem 2rem 5rem 2rem;
-      max-width: 1300px;
+    /* KONTENER STRON */
+    main {
+      padding-top: 8rem;
+      max-width: 1400px;
       margin: 0 auto;
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      padding-left: 2rem;
+      padding-right: 2rem;
     }
 
-    .page.active {
+    .page-view {
+      display: none;
+    }
+
+    .page-view.active {
       display: block;
-      opacity: 1;
-      transform: translateY(0);
+      animation: fadeIn 0.6s ease forwards;
     }
 
-    .reveal {
-      opacity: 0;
-      transform: translateY(40px);
-      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
+    /* SEKCJA HERO */
+    .hero {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 3rem;
+      align-items: center;
+      margin-bottom: 6rem;
     }
 
     .hero-title {
       font-family: var(--font-title);
-      font-size: 4.2rem;
-      text-align: center;
-      line-height: 1.1;
-      letter-spacing: 2px;
-      background: linear-gradient(180deg, #ffffff 30%, var(--text-muted) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 1rem;
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      line-height: 1;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
     }
 
-    .hero-subtitle {
-      text-align: center;
-      font-size: 1.2rem;
-      color: var(--text-muted);
-      margin-bottom: 5rem;
-      font-weight: 300;
-      letter-spacing: 1px;
+    .hero-title span {
+      color: var(--accent-neon);
+      display: block;
     }
 
-    .glass-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 20px;
-      padding: 3rem;
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
-      position: relative;
-      overflow: hidden;
-      transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.1s ease-out;
-      transform-style: preserve-3d;
+    .hero-desc {
+      font-size: 1.05rem;
+      color: #8b95a5;
+      margin-bottom: 2.5rem;
+      line-height: 1.6;
     }
 
-    .glass-card:hover {
-      border-color: var(--accent-color);
-      box-shadow: 0 0 30px var(--accent-glow), 0 20px 40px rgba(0,0,0,0.6);
-    }
-
-    .about-main {
+    /* SEKCJA O MNIE */
+    .about-section {
       display: grid;
-      grid-template-columns: 1fr 1.3fr;
+      grid-template-columns: 0.9fr 1.1fr;
       gap: 4rem;
       align-items: center;
+      margin-bottom: 8rem;
+      background: rgba(15, 20, 30, 0.4);
+      border: 1px solid var(--glass-border);
+      padding: 4rem;
+      clip-path: var(--card-clip);
     }
 
     .about-img-box {
+      width: 100%;
+      height: 400px;
       position: relative;
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
     }
 
     .about-img {
       width: 100%;
-      height: 520px;
+      height: 100%;
       object-fit: cover;
-      display: block;
-      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      filter: contrast(120%) grayscale(50%);
+      border: 1px solid var(--glass-border);
     }
-
-    .about-img-box:hover .about-img { transform: scale(1.05); }
 
     .about-text h2 {
       font-family: var(--font-title);
-      font-size: 3rem;
+      font-size: 2.2rem;
       margin-bottom: 1.5rem;
-      line-height: 1.2;
+      text-transform: uppercase;
     }
 
     .about-text p {
-      color: var(--text-muted);
+      color: #909bb0;
+      line-height: 1.7;
       margin-bottom: 1.5rem;
-      font-size: 1.05rem;
+      font-size: 1rem;
     }
 
-    .pricing-section { margin: 8rem 0 4rem 0; }
-
-    .section-tag {
-      font-size: 0.8rem;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      color: var(--accent-color);
-      font-weight: 700;
-      margin-bottom: 1rem;
-      display: block;
+    /* SZALONE KARTY I GALERIA */
+    .wild-card {
+      background: rgba(15, 20, 30, 0.7);
+      border: 1px solid var(--glass-border);
+      padding: 2.5rem;
+      clip-path: var(--card-clip);
+      backdrop-filter: blur(15px);
     }
 
-    .pricing-title {
-      font-family: var(--font-title);
-      font-size: 3.2rem;
-      max-width: 850px;
-      line-height: 1.2;
-      margin-bottom: 1.5rem;
-    }
-
-    .pricing-grid {
+    .grid-3 {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-      gap: 2.5rem;
-      margin-top: 3.5rem;
-    }
-
-    .pricing-card {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .pricing-card h3 {
-      font-family: var(--font-title);
-      font-size: 1.6rem;
-      margin-bottom: 1rem;
-    }
-
-    .pricing-price {
-      font-family: var(--font-title);
-      font-size: 3.2rem;
-      color: var(--accent-color);
-      margin-bottom: 2rem;
-      font-weight: 700;
-      text-shadow: 0 0 20px var(--accent-glow);
-    }
-
-    .pricing-features {
-      list-style: none;
-      margin-bottom: 2rem;
-    }
-
-    .pricing-features li {
-      position: relative;
-      padding-left: 1.8rem;
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      margin-bottom: 1rem;
-    }
-
-    .pricing-features li::before {
-      content: '◈';
-      position: absolute;
-      left: 0; top: 0;
-      color: var(--accent-color);
-    }
-
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 2.5rem;
       margin-top: 3rem;
+      margin-bottom: 6rem;
     }
 
-    .card-img-wrapper {
-      position: relative;
-      overflow: hidden;
-      height: 420px;
-      border-radius: 12px;
-      margin-bottom: 1.5rem;
+    .card-item {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--glass-border);
+      padding: 1.8rem;
+    }
+
+    .card-item:hover {
+      border-color: var(--accent-neon);
+      transform: translateY(-8px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
     }
 
     .card-img {
-      width: 100%; height: 100%;
+      width: 100%;
+      height: 320px;
       object-fit: cover;
-      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      margin-bottom: 1.5rem;
+      filter: grayscale(40%);
     }
 
-    .glass-card:hover .card-img { transform: scale(1.08); }
+    .card-item:hover .card-img {
+      filter: grayscale(0%);
+    }
 
     .card-title {
       font-family: var(--font-title);
-      font-size: 1.8rem;
+      font-size: 1.4rem;
       margin-bottom: 0.5rem;
     }
 
     .card-desc {
-      font-size: 0.95rem;
-      color: var(--text-muted);
-      margin-bottom: 1.8rem;
+      color: #8b95a5;
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
     }
 
-    .buy-btn {
-      display: inline-block;
-      width: 100%;
-      text-align: center;
-      padding: 0.9rem 0;
-      background: transparent;
-      border: 1px solid var(--border-color);
-      color: var(--text-color);
-      text-decoration: none;
-      font-size: 0.85rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      font-weight: 600;
-      border-radius: 8px;
-      transition: all 0.4s ease;
-    }
-
-    .buy-btn:hover {
-      background: var(--accent-color);
-      color: var(--bg-color);
-      border-color: var(--accent-color);
-      box-shadow: 0 0 20px var(--accent-glow);
+    .price-tag {
+      font-family: var(--font-title);
+      font-size: 2rem;
+      color: var(--accent-neon);
+      margin-bottom: 1rem;
+      font-weight: 800;
     }
 
     footer {
+      margin-top: 8rem;
+      padding: 3rem;
+      border-top: 1px solid var(--glass-border);
       text-align: center;
-      padding: 5rem 2rem 3rem 2rem;
-      margin-top: 6rem;
-      border-top: 1px solid var(--border-color);
-      color: var(--text-muted);
-      font-size: 0.85rem;
+      color: #606b7d;
+      font-size: 0.8rem;
+      letter-spacing: 2px;
     }
 
     @media (max-width: 900px) {
-      .about-main { grid-template-columns: 1fr; }
-      .hero-title { font-size: 2.8rem; }
-      .pricing-title { font-size: 2.2rem; }
-      .nav-links { gap: 1rem; }
+      .hero, .about-section { grid-template-columns: 1fr; padding: 2rem; }
+      header { padding: 1rem 1.5rem; }
     }
   </style>
 </head>
-<body class="theme-tattoo">
+<body class="mode-tattoo">
 
-  <div class="bg-canvas" id="bgCanvas"></div>
+  <div class="portal-bg"></div>
+  <div class="grid-mesh"></div>
 
-  <!-- NAVBAR ZE WSZYSTKIMI ODNOŚNIKAMI -->
+  <!-- NAWIGACJA -->
   <header>
-    <nav>
-      <div class="logo" onclick="switchPage('tattoo')">AETHERIA<span>.</span></div>
-      <ul class="nav-links">
-        <li><a onclick="switchPage('tattoo')">Tatuaże</a></li>
-        <li><a onclick="switchPage('art')">Malarstwo</a></li>
-        
-        <!-- Linki dla Tatuażu -->
-        <li class="btn-tattoo-only"><a href="#o-mnie-tattoo">O Mnie</a></li>
-        <li class="btn-tattoo-only"><a href="#portfolio-tattoo">Portfolio</a></li>
-        <li class="btn-tattoo-only"><a href="#cennik-tattoo">Cennik</a></li>
+    <div class="brand" onclick="switchTab('tattoo')">AETHERIA</div>
+    
+    <div class="switcher-box">
+      <button class="tab-btn active" id="tab-tattoo" onclick="switchTab('tattoo')">Tatuaże</button>
+      <button class="tab-btn" id="tab-art" onclick="switchTab('art')">Malarstwo</button>
+    </div>
 
-        <!-- Linki dla Art -->
-        <li class="btn-art-only"><a href="#o-mnie-art">O Mnie</a></li>
-        <li class="btn-art-only"><a href="#kolekcja-art">Dzieła</a></li>
-
-        <li class="btn-tattoo-only">
-          <a href="https://instagram.com/twój_profil" target="_blank" class="action-btn">Rezerwacja IG ↗</a>
-        </li>
-        <li class="btn-art-only">
-          <a href="https://vinted.pl/twój_profil" target="_blank" class="action-btn">Sklep Vinted ↗</a>
-        </li>
-      </ul>
-    </nav>
+    <a href="https://instagram.com" target="_blank" class="action-link" id="header-action-btn">Rezerwacja ↗</a>
   </header>
 
-  <!-- PODSTRONA 1: TATUAŻE -->
-  <main id="page-tattoo" class="page active">
-    <h1 class="hero-title">Atelier Tatuażu Autorskiego</h1>
-    <p class="hero-subtitle">Ekskluzywna sztuka na skórze. Unikalne kompozycje mikrorealistyczne i darkwork.</p>
+  <main>
+    <!-- PODSTRONA 1: TATUAŻE -->
+    <div id="view-tattoo" class="page-view active">
+      <section class="hero">
+        <div>
+          <h1 class="hero-title">Rytuał & <span>Anatomia</span></h1>
+          <p class="hero-desc">Kameralne studio tatuażu autorskiego. Specjalizacja: Microrealism, Fine-Line, Darkwork oraz monumentalne kompozycje anatomiczne dla klienta indywidualnego.</p>
+          <a href="https://instagram.com" target="_blank" class="action-link">Umów Sesję Tatuażu ↗</a>
+        </div>
 
-    <!-- O MNIE -->
-    <section id="o-mnie-tattoo" class="glass-card about-container reveal">
-      <div class="about-main">
+        <div class="wild-card">
+          <h3 style="font-family: var(--font-title); font-size: 1.5rem; margin-bottom: 1rem;">Standardy Studio</h3>
+          <p style="color: #8b95a5; margin-bottom: 1.5rem;">Praca w trybie VIP (jeden klient dziennie). Indywidualne projekty bez powielania wzorów.</p>
+          <div style="border-left: 2px solid var(--accent-neon); padding-left: 1rem; font-weight: 700;">
+            100% AUTORSKIE PROJEKTY
+          </div>
+        </div>
+      </section>
+
+      <!-- SEKCJA O MNIE - TATUAŻYSTA -->
+      <section class="about-section">
         <div class="about-img-box">
-          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=700&q=80" alt="Master Artist" class="about-img">
+          <img src="https://images.unsplash.com/photo-1598371839696-5c5bb00bdc28?auto=format&fit=crop&w=700&q=80" alt="Artysta przy pracy" class="about-img">
         </div>
         <div class="about-text">
-          <h2>Mistrzostwo Formy & Detalu</h2>
-          <p>Aetheria to autorska przestrzeń tworzona przez dyplomowaną artystkę Akademii Sztuk Pięknych. Łącząc wiedzę z zakresu anatomii człowieka i klasycznego malarstwa, tworzę projekty będące bezkompromisowymi dziełami sztuki.</p>
-          <p>Odrzucamy masowe szablony i chwilowe trendy. Każda sesja to indywidualny proces twórczy, dopasowany bezpośrednio do struktury Twojego ciała.</p>
-          <a href="https://instagram.com/twój_profil" target="_blank" class="action-btn" style="margin-top: 1rem;">
-            Konsultacja Indywidualna ↗
-          </a>
+          <h2>Kim jestem?</h2>
+          <p>Tworzę na styku mrocznej estetyki, anatomii i nowoczesnej precyzji linii. Moje podejście do tatuażu wykracza poza rzemiosło – to proces transformacji i świadomego naznaczania ciała unikalną formą.</p>
+          <p>Każdy projekt powstaje w kameralnych warunkach, z pełnym skupieniem na Twojej wizji oraz anatomicznej budowie ciała. Nie kopiuję klisz – tworzę dzieła szyte na miarę Twojej skóry.</p>
+          <a href="https://instagram.com" target="_blank" class="action-link" style="margin-top: 1rem;">Poznaj mój profil ↗</a>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- PORTFOLIO -->
-    <div id="portfolio-tattoo" class="reveal" style="margin-top: 6rem;">
-      <span class="section-tag" style="text-align: center;">Portfolio</span>
-      <h2 style="font-family: var(--font-title); font-size: 3rem; text-align: center; margin-bottom: 2rem;">Wybrane Realizacje</h2>
+      <h2 style="font-family: var(--font-title); font-size: 2rem; margin-bottom: 2rem;">Przykładowe Projekty & Cennik</h2>
       
-      <div class="gallery">
-        <div class="glass-card tilt-card">
-          <div class="card-img-wrapper">
-            <img src="https://images.unsplash.com/photo-1598371839696-5c5bb00bdc28?auto=format&fit=crop&w=600&q=80" alt="Botanical Art" class="card-img">
-          </div>
-          <h3 class="card-title">Botanica No. 7</h3>
-          <p class="card-desc">Subtelna architektura organiczna wykonana igłą 0.18mm. Czas realizacji: 4h.</p>
-          <a href="https://instagram.com/twój_profil" target="_blank" class="buy-btn">Rezerwuj Podobny ↗</a>
+      <div class="grid-3">
+        <div class="card-item">
+          <img src="https://images.unsplash.com/photo-1598371839696-5c5bb00bdc28?auto=format&fit=crop&w=600&q=80" alt="Botanica" class="card-img">
+          <h3 class="card-title">Fine-Line / Micro</h3>
+          <p class="card-desc">Drobne kompozycje precyzyjne o wysokiej szczegółowości.</p>
+          <div class="price-tag">od 500 PLN</div>
+          <a href="https://instagram.com" target="_blank" class="action-link" style="width: 100%; text-align: center;">Rezerwuj</a>
         </div>
 
-        <div class="glass-card tilt-card">
-          <div class="card-img-wrapper">
-            <img src="https://images.unsplash.com/photo-1562962230-16e4623d36e6?auto=format&fit=crop&w=600&q=80" alt="Darkwork Art" class="card-img">
-          </div>
-          <h3 class="card-title">Aethelgard Darkwork</h3>
-          <p class="card-desc">Głębokie kontrasty z wykorzystaniem pigmentów głębokiej czerni. Sesja całodniowa.</p>
-          <a href="https://instagram.com/twój_profil" target="_blank" class="buy-btn">Rezerwuj Podobny ↗</a>
+        <div class="card-item">
+          <img src="https://images.unsplash.com/photo-1562962230-16e4623d36e6?auto=format&fit=crop&w=600&q=80" alt="Darkwork" class="card-img">
+          <h3 class="card-title">Full Day Session</h3>
+          <p class="card-desc">Całodniowa sesja autorska (6-8 godzin intensywnej pracy).</p>
+          <div class="price-tag">2200 PLN</div>
+          <a href="https://instagram.com" target="_blank" class="action-link" style="width: 100%; text-align: center;">Rezerwuj</a>
         </div>
 
-        <div class="glass-card tilt-card">
-          <div class="card-img-wrapper">
-            <img src="https://images.unsplash.com/photo-1611501275019-9b5cda994e8d?auto=format&fit=crop&w=600&q=80" alt="Microrealism" class="card-img">
-          </div>
-          <h3 class="card-title">Micro-Sculpture</h3>
-          <p class="card-desc">Mikrorealizm inspirowany rzeźbą renesansową. Złożoność wielowarstwowa.</p>
-          <a href="https://instagram.com/twój_profil" target="_blank" class="buy-btn">Rezerwuj Podobny ↗</a>
+        <div class="card-item">
+          <img src="https://images.unsplash.com/photo-1611501275019-9b5cda994e8d?auto=format&fit=crop&w=600&q=80" alt="Sleeve" class="card-img">
+          <h3 class="card-title">Projekt Duży / Rękaw</h3>
+          <p class="card-desc">Wielosesyjne kompozycje anatomiczne (plecy, rękawy).</p>
+          <div class="price-tag">Wycena Indywidualna</div>
+          <a href="https://instagram.com" target="_blank" class="action-link" style="width: 100%; text-align: center;">Konsultacja</a>
         </div>
       </div>
     </div>
 
-    <!-- CENNIK KARTY -->
-    <section id="cennik-tattoo" class="pricing-section reveal">
-      <span class="section-tag">Inwestycja & Rezerwacja</span>
-      <h2 class="pricing-title">Przejrzysty System Sesyjny</h2>
-      <p style="color: var(--text-muted); font-size: 1.1rem; max-width: 750px;">Wszystkie projekty wyceniane są w oparciu o czas trwania sesji oraz stopień skomplikowania wzoru. Bez ukrytych opłat.</p>
-
-      <div class="pricing-grid">
-        <div class="glass-card pricing-card tilt-card">
-          <div>
-            <h3>Fine-Line Micro</h3>
-            <div class="pricing-price">od 500 PLN</div>
-            <ul class="pricing-features">
-              <li>Drobne wzory do 7 cm</li>
-              <li>Precyzyjny line-work / Dotwork</li>
-              <li>Sterylny zestaw pielęgnacyjny w cenie</li>
-              <li>Bezpłatna korekta do 3 miesięcy</li>
-            </ul>
-          </div>
-          <a href="https://instagram.com/twój_profil" target="_blank" class="buy-btn">Zapytaj o Termin</a>
+    <!-- PODSTRONA 2: MALARSTWO -->
+    <div id="view-art" class="page-view">
+      <section class="hero">
+        <div>
+          <h1 class="hero-title">Materia & <span>Płótno</span></h1>
+          <p class="hero-desc">Prywatna kolekcja sztuki sztalugowej. Obrazy olejne i akrylowe tworzone na lnianym podłożu, wzbogacone m.in. 24K złotem oraz fakturą mineralną.</p>
+          <a href="https://vinted.pl" target="_blank" class="action-link">Przejdź do Sklepu Vinted ↗</a>
         </div>
 
-        <div class="glass-card pricing-card tilt-card" style="border-color: var(--accent-color);">
-          <div>
-            <span class="section-tag">Najczęściej Wybierane</span>
-            <h3>Sesja Dniowa (Full Day)</h3>
-            <div class="pricing-price">2200 PLN</div>
-            <ul class="pricing-features">
-              <li>Pełny dzień pracy w studio (6-8 godzin)</li>
-              <li>Dedykowany, duży projekt autorski</li>
-              <li>Ekskluzywna opieka potreningowa</li>
-              <li>Poczęstunek i napoje w strefie VIP</li>
-            </ul>
+        <div class="wild-card">
+          <h3 style="font-family: var(--font-title); font-size: 1.5rem; margin-bottom: 1rem;">Dla Kolekcjonerów</h3>
+          <p style="color: #8b95a5; margin-bottom: 1.5rem;">Dzieła dostępne do prywatnych wnętrz oraz jako wielkoformatowe instalacje do przestrzeni ekskluzywnych.</p>
+          <div style="border-left: 2px solid var(--accent-neon); padding-left: 1rem; font-weight: 700;">
+            CERTYFIKAT AUTENTYCZNOŚCI
           </div>
-          <a href="https://instagram.com/twój_profil" target="_blank" class="buy-btn" style="background: var(--accent-color); color: var(--bg-color);">Rezerwuj Sesję</a>
         </div>
+      </section>
 
-        <div class="glass-card pricing-card tilt-card">
-          <div>
-            <h3>Projekt Wielosesyjny</h3>
-            <div class="pricing-price">Wycena Indywidualna</div>
-            <ul class="pricing-features">
-              <li>Kompozycje na całe plecy / rękawy</li>
-              <li>Wizualizacja 3D przed przystąpieniem do pracy</li>
-              <li>Elastyczny harmonogram płatności</li>
-              <li>Priorytetowy dobór terminów</li>
-            </ul>
-          </div>
-          <a href="https://instagram.com/twój_profil" target="_blank" class="buy-btn">Umów Konsultację</a>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- PODSTRONA 2: OBRAZY -->
-  <main id="page-art" class="page">
-    <h1 class="hero-title">Galeria Sztuki Współczesnej</h1>
-    <p class="hero-subtitle">Oryginalne dzieła malarskie na płótnie. Edycje kolekcjonerskie 1/1.</p>
-
-    <!-- O MNIE MALARSTWO -->
-    <section id="o-mnie-art" class="glass-card about-container reveal">
-      <div class="about-main">
+      <!-- SEKCJA O MNIE - MALARZ -->
+      <section class="about-section">
         <div class="about-img-box">
-          <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=700&q=80" alt="Fine Art Gallery" class="about-img">
+          <img src="https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=700&q=80" alt="Pracownia malarska" class="about-img">
         </div>
         <div class="about-text">
-          <h2>Malarstwo Sztalugowe</h2>
-          <p>Prace tworzone w cichej pracowni stanowią dopełnienie mojej ekspresji twórczej. Wykorzystuję płótna lniane najwyższej gramatury, autorskie mikstury struktur mineralnych oraz szlachetne pigmenty olejowe.</p>
-          <p>Każdy obraz sprzedawany jest jako oryginalny egzemplarz niepowtarzalny (1/1) wraz z fizycznym Certyfikatem Autentyczności sygnowanym przez artystkę.</p>
-          <a href="https://vinted.pl/twój_profil" target="_blank" class="action-btn" style="margin-top: 1rem;">
-            Oficjalny Sklep Vinted ↗
-          </a>
+          <h2>Filozofia Twórczości Płóciennej</h2>
+          <p>Moje malarstwo to eksploracja materii, struktury i światła. Wykorzystuję tradycyjne techniki olejne i akrylowe, łącząc je z surowym lnem, płatkami złota oraz masami mineralnymi, co nadaje pracom głębię trójwymiaru.</p>
+          <p>Każdy obraz powstaje powoli, warstwa po warstwie, stając się unikalnym nośnikiem emocji. Moje płótna znajdują dom w prywatnych kolekcjach w kraju i zagranicą.</p>
+          <a href="https://vinted.pl" target="_blank" class="action-link" style="margin-top: 1rem;">Zobacz dostępne prace ↗</a>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- GALERIA OBRAZÓW -->
-    <div id="kolekcja-art" class="reveal" style="margin-top: 6rem;">
-      <span class="section-tag" style="text-align: center;">Dostępne Dzieła</span>
-      <h2 style="font-family: var(--font-title); font-size: 3rem; text-align: center; margin-bottom: 2rem;">Kolekcja Prywatna</h2>
-      
-      <div class="gallery">
-        <div class="glass-card tilt-card">
-          <div class="card-img-wrapper">
-            <img src="https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=600&q=80" alt="Abstract Canvas" class="card-img">
-          </div>
+      <h2 style="font-family: var(--font-title); font-size: 2rem; margin-bottom: 2rem;">Galeria Dzieł Sztuki & Przykładowe Projekty</h2>
+
+      <div class="grid-3">
+        <div class="card-item">
+          <img src="https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=600&q=80" alt="Canvas" class="card-img">
           <h3 class="card-title">Eteryczny Horyzont</h3>
-          <p class="card-desc">Technika własna, Akryl & Złoto 24K na płótnie | 120 x 90 cm</p>
-          <a href="https://vinted.pl/twój_profil" target="_blank" class="buy-btn">Kup na Vinted ↗</a>
+          <p class="card-desc">Akryl & Złoto 24K | 120 x 90 cm (Dostępne)</p>
+          <a href="https://vinted.pl" target="_blank" class="action-link" style="width: 100%; text-align: center;">Kup na Vinted ↗</a>
         </div>
 
-        <div class="glass-card tilt-card">
-          <div class="card-img-wrapper">
-            <img src="https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&w=600&q=80" alt="Texture Painting" class="card-img">
-          </div>
+        <div class="card-item">
+          <img src="https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&w=600&q=80" alt="Texture" class="card-img">
           <h3 class="card-title">Materia & Czas</h3>
-          <p class="card-desc">Farby olejne i struktura mineralna | 80 x 80 cm</p>
-          <a href="https://vinted.pl/twój_profil" target="_blank" class="buy-btn">Kup na Vinted ↗</a>
+          <p class="card-desc">Olej & Struktura Mineralna | 80 x 80 cm (Kolekcja prywatna)</p>
+          <a href="https://vinted.pl" target="_blank" class="action-link" style="width: 100%; text-align: center;">Kup na Vinted ↗</a>
         </div>
 
-        <div class="glass-card tilt-card">
-          <div class="card-img-wrapper">
-            <img src="https://images.unsplash.com/photo-1578926375705-90ae3353f50a?auto=format&fit=crop&w=600&q=80" alt="Monochrome Oil" class="card-img">
-          </div>
+        <div class="card-item">
+          <img src="https://images.unsplash.com/photo-1578926375705-90ae3353f50a?auto=format&fit=crop&w=600&q=80" alt="Oil Painting" class="card-img">
           <h3 class="card-title">Nocny Nokturn</h3>
-          <p class="card-desc">Głęboki olej na surowym lnie | 140 x 100 cm</p>
-          <a href="https://vinted.pl/twój_profil" target="_blank" class="buy-btn">Kup na Vinted ↗</a>
+          <p class="card-desc">Olej na surowym lnie | 140 x 100 cm (Archiwum projektów)</p>
+          <a href="https://vinted.pl" target="_blank" class="action-link" style="width: 100%; text-align: center;">Kup na Vinted ↗</a>
         </div>
       </div>
     </div>
   </main>
 
   <footer>
-    <p>© 2026 AETHERIA ART STUDIO. Wszystkie prawa zastrzeżone.</p>
+    <p>© 2026 AETHERIA ART & TATTOO STUDIO. ALL RIGHTS RESERVED.</p>
   </footer>
 
   <script>
-    function switchPage(pageType) {
-      const pageTattoo = document.getElementById('page-tattoo');
-      const pageArt = document.getElementById('page-art');
+    function switchTab(tab) {
       const body = document.body;
+      const tabTattoo = document.getElementById('tab-tattoo');
+      const tabArt = document.getElementById('tab-art');
+      const viewTattoo = document.getElementById('view-tattoo');
+      const viewArt = document.getElementById('view-art');
+      const headerBtn = document.getElementById('header-action-btn');
 
-      if (pageType === 'tattoo') {
-        pageArt.classList.remove('active');
+      if (tab === 'tattoo') {
+        body.className = 'mode-tattoo';
+        tabTattoo.classList.add('active');
+        tabArt.classList.remove('active');
+
+        headerBtn.innerText = 'Rezerwacja ↗';
+        headerBtn.href = 'https://instagram.com';
+
+        viewArt.classList.remove('active');
         setTimeout(() => {
-          pageArt.style.display = 'none';
-          pageTattoo.style.display = 'block';
-          setTimeout(() => {
-            pageTattoo.classList.add('active');
-            triggerReveals();
-          }, 50);
-        }, 400);
+          viewArt.style.display = 'none';
+          viewTattoo.style.display = 'block';
+          setTimeout(() => viewTattoo.classList.add('active'), 50);
+        }, 300);
 
-        body.classList.remove('theme-art');
-        body.classList.add('theme-tattoo');
+      } else {
+        body.className = 'mode-art';
+        tabArt.classList.add('active');
+        tabTattoo.classList.remove('active');
 
-      } else if (pageType === 'art') {
-        pageTattoo.classList.remove('active');
+        headerBtn.innerText = 'Sklep Vinted ↗';
+        headerBtn.href = 'https://vinted.pl';
+
+        viewTattoo.classList.remove('active');
         setTimeout(() => {
-          pageTattoo.style.display = 'none';
-          pageArt.style.display = 'block';
-          setTimeout(() => {
-            pageArt.classList.add('active');
-            triggerReveals();
-          }, 50);
-        }, 400);
-
-        body.classList.remove('theme-tattoo');
-        body.classList.add('theme-art');
+          viewTattoo.style.display = 'none';
+          viewArt.style.display = 'block';
+          setTimeout(() => viewArt.classList.add('active'), 50);
+        }, 300);
       }
-
-      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-
-    function triggerReveals() {
-      const reveals = document.querySelectorAll('.reveal');
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-          }
-        });
-      }, { threshold: 0.1 });
-
-      reveals.forEach(reveal => observer.observe(reveal));
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-      triggerReveals();
-    });
-
-    const bgCanvas = document.getElementById('bgCanvas');
-    window.addEventListener('mousemove', (e) => {
-      const x = (e.clientX / window.innerWidth - 0.5) * 20;
-      const y = (e.clientY / window.innerHeight - 0.5) * 20;
-      bgCanvas.style.transform = `translate(${x}px, ${y}px) scale(1.05)`;
-    });
-
-    const tiltCards = document.querySelectorAll('.tilt-card');
-    tiltCards.forEach(card => {
-      card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-
-        const rotateX = (y - centerY) / 20;
-        const rotateY = (centerX - x) / 20;
-
-        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
-      });
-
-      card.addEventListener('mouseleave', () => {
-        card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)`;
-      });
-    });
   </script>
 </body>
 </html>
