@@ -13,7 +13,7 @@
     /* DEFINICJA CZCIONKI AMORIA */
     @font-face {
       font-family: 'Amoria';
-      src: url('AMORIA.otf') format('opentype');
+      src: url('amoria/AMORIA.otf') format('opentype');
       font-weight: normal;
       font-style: normal;
     }
@@ -135,7 +135,6 @@
       margin-left: 2px;
     }
 
-    /* POWIĘKSZONY I BARDZIEJ WIDOCZNY PRZEŁĄCZNIK ZAKŁADEK */
     .switcher-box {
       display: flex;
       background: rgba(255, 255, 255, 0.06);
@@ -187,7 +186,6 @@
       box-shadow: 0 0 25px var(--accent-neon);
     }
 
-    /* GŁÓWNY KONTENER */
     main {
       padding-top: 8rem;
       max-width: 1100px;
@@ -253,7 +251,6 @@
       font-weight: 300;
     }
 
-    /* SEKCJA O MNIE Z KARUZELĄ (PROSTOKĄTNA RAMKA) */
     .about-section {
       display: grid;
       grid-template-columns: 0.9fr 1.1fr;
@@ -300,7 +297,6 @@
       cursor: pointer;
     }
 
-    /* PRZYCISKI I WSKAŹNIKI KARUZELI */
     .carousel-btn {
       position: absolute;
       top: 50%;
@@ -477,7 +473,6 @@
       font-weight: 700;
     }
 
-    /* PROSTOKĄTNA SEKCJA INFORMACYJNA */
     .info-section {
       margin-top: 4rem;
       background: rgba(15, 20, 30, 0.6);
@@ -509,7 +504,6 @@
       margin-bottom: 1rem;
     }
 
-    /* FAQ */
     .faq-item {
       background: rgba(255, 255, 255, 0.02);
       border: 1px solid var(--glass-border);
@@ -571,7 +565,6 @@
       font-weight: 300;
     }
 
-    /* COOKIES & RODO BANNER */
     #cookie-banner {
       position: fixed;
       bottom: 20px;
@@ -629,7 +622,6 @@
       border: 1px solid var(--glass-border);
     }
 
-    /* LIGHTBOX */
     .lightbox {
       display: none;
       position: fixed;
@@ -745,8 +737,7 @@
           <h2>O mnie</h2>
           
           <p>Jestem tatuatorką z Katowic i zamieniam codzienność w kolorowe dziarki 🎨  Jeżeli szukasz osoby, z którą można pogadać o wszystkim albo pomilczeć w komfortowej atmosferze - to właśnie ją znalazłeś. Przede wszystkim dbam o komfort swoich klientów, więc nie obawiaj się zadawać pytań. Jestem po to, żeby na nie odpowiedzieć i rozwiać Twoje wątpliwości ❤️</p>
-          <p>Najbardziej kocham kolorowe dziarki i to właśnie ich wykonuję najwięcej. Ale nie samym kolorem człowiek żyje - równie chętnie tworzę też czarne tatuaże, abstrakcje czy napisy. Zjedź niżej, żeby zobaczyć moje realizacje i sprawdź, w jakim klimacie mogłabym stworzyć coś dla Ciebie 🥳
-</p>
+          <p>Najbardziej kocham kolorowe dziarki i to właśnie ich wykonuję najwięcej. Ale nie samym kolorem człowiek żyje - równie chętnie tworzę też czarne tatuaże, abstrakcje czy napisy. Zjedź niżej, żeby zobaczyć moje realizacje i sprawdź, w jakim klimacie mogłabym stworzyć coś dla Ciebie 🥳</p>
         </div>
       </section>
 
@@ -871,7 +862,7 @@
           <p>Moja sztuka to spojrzenie na otaczającą nas rzeczywistość – ale nie tą, którą codziennie pomijamy z przyzwyczajenia. Wybieram przedmioty codziennego użytku i zwykłe z pozoru obiekty, a potem dodaję im więcej koloru i odrobinę magii.</p>
           <p>Chcę, żeby to, co doskonale nam już znane - nagle zaskoczyło i skłoniło do zatrzymania się w obecnym momencie.</p>
           <p>Zapraszam Cię do mojego świata ✨</p>
-          
+          <p style="margin-top: 1rem;">Wszystkie aktualnie dostępne prace i ich szczegółowe wymiary znajdziesz bezpośrednio na moim profilu na Vinted.</p>
         </div>
       </section>
 
@@ -995,7 +986,6 @@
       }
     }
 
-    // LOGIKA KARUZELI
     let slideIndex = 0;
     const totalSlides = 3;
     let carouselInterval;
