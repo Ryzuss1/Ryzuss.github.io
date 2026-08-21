@@ -18,8 +18,8 @@
       --glass-border: rgba(230, 197, 148, 0.25);
       --font-title: 'Syne', sans-serif;
       --font-body: 'Space Grotesk', sans-serif;
-      --card-clip: polygon(0 0, 100% 0, 95% 100%, 0% 100%);
-      --btn-clip: polygon(12px 0, 100% 0, calc(100% - 12px) 100%, 0 100%);
+      --card-clip: polygon(0 0, 100% 0, 98% 100%, 0% 100%);
+      --btn-clip: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
     }
 
     body.mode-art {
@@ -33,7 +33,7 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      transition: background 0.5s ease, border-color 0.5s ease, color 0.3s ease, transform 0.3s ease;
+      transition: background 0.4s ease, border-color 0.4s ease, color 0.3s ease, transform 0.3s ease;
     }
 
     body {
@@ -59,90 +59,94 @@
       inset: 0;
       background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
                         linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-      background-size: 40px 40px;
+      background-size: 30px 30px;
       z-index: -1;
-      opacity: 0.5;
+      opacity: 0.4;
     }
 
-    /* NAV BAR */
+    /* NAV BAR - MOBILNIE PRZYJAZNY */
     header {
       position: fixed;
       top: 0; left: 0; width: 100%;
-      padding: 1.2rem 3rem;
+      padding: 1rem 1.5rem;
       display: flex;
+      flex-direction: row;
       justify-content: space-between;
       align-items: center;
       z-index: 1000;
       backdrop-filter: blur(20px);
-      background: rgba(3, 4, 6, 0.85);
+      background: rgba(3, 4, 6, 0.9);
       border-bottom: 1px solid var(--glass-border);
+      gap: 1rem;
     }
 
     .brand {
       font-family: var(--font-title);
-      font-size: 1.8rem;
+      font-size: 1.4rem;
       font-weight: 800;
-      letter-spacing: 4px;
+      letter-spacing: 2px;
       text-transform: uppercase;
       color: #fff;
       cursor: pointer;
-      text-shadow: 0 0 15px var(--accent-neon);
+      text-shadow: 0 0 10px var(--accent-neon);
+      white-space: nowrap;
     }
 
     .switcher-box {
       display: flex;
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid var(--glass-border);
-      padding: 4px;
-      border-radius: 40px;
+      padding: 3px;
+      border-radius: 30px;
     }
 
     .tab-btn {
       border: none;
       background: transparent;
       color: #fff;
-      padding: 0.6rem 1.8rem;
+      padding: 0.4rem 1rem;
       font-family: var(--font-body);
-      font-size: 0.8rem;
+      font-size: 0.7rem;
       font-weight: 700;
-      letter-spacing: 2px;
+      letter-spacing: 1px;
       text-transform: uppercase;
       cursor: pointer;
-      border-radius: 30px;
+      border-radius: 20px;
     }
 
     .tab-btn.active {
       background: var(--accent-neon);
       color: #000;
-      box-shadow: 0 0 20px var(--accent-neon);
+      box-shadow: 0 0 15px var(--accent-neon);
     }
 
     .action-link {
       display: inline-block;
-      padding: 0.8rem 2rem;
+      padding: 0.7rem 1.2rem;
       background: var(--accent-neon);
       color: #000;
       font-weight: 700;
-      font-size: 0.8rem;
-      letter-spacing: 2px;
+      font-size: 0.75rem;
+      letter-spacing: 1px;
       text-transform: uppercase;
       text-decoration: none;
       clip-path: var(--btn-clip);
-      box-shadow: 0 0 15px var(--accent-neon);
+      box-shadow: 0 0 10px var(--accent-neon);
+      white-space: nowrap;
     }
 
     .action-link:hover {
-      transform: scale(1.05) rotate(-1deg);
+      transform: scale(1.03);
       background: #fff;
     }
 
     /* KONTENER STRON */
     main {
-      padding-top: 8rem;
-      max-width: 1400px;
+      padding-top: 7rem;
+      max-width: 1300px;
       margin: 0 auto;
-      padding-left: 2rem;
-      padding-right: 2rem;
+      padding-left: 1rem;
+      padding-right: 1rem;
     }
 
     .page-view {
@@ -151,11 +155,11 @@
 
     .page-view.active {
       display: block;
-      animation: fadeIn 0.6s ease forwards;
+      animation: fadeIn 0.5s ease forwards;
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
+      from { opacity: 0; transform: translateY(15px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
@@ -163,17 +167,17 @@
     .hero {
       display: grid;
       grid-template-columns: 1.2fr 0.8fr;
-      gap: 3rem;
+      gap: 2rem;
       align-items: center;
-      margin-bottom: 6rem;
+      margin-bottom: 4rem;
     }
 
     .hero-title {
       font-family: var(--font-title);
-      font-size: clamp(2.5rem, 5vw, 4.5rem);
-      line-height: 1;
+      font-size: clamp(2rem, 7vw, 4rem);
+      line-height: 1.05;
       text-transform: uppercase;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1rem;
     }
 
     .hero-title span {
@@ -182,9 +186,9 @@
     }
 
     .hero-desc {
-      font-size: 1.05rem;
+      font-size: 0.95rem;
       color: #8b95a5;
-      margin-bottom: 2.5rem;
+      margin-bottom: 2rem;
       line-height: 1.6;
     }
 
@@ -192,19 +196,18 @@
     .about-section {
       display: grid;
       grid-template-columns: 0.9fr 1.1fr;
-      gap: 4rem;
+      gap: 2.5rem;
       align-items: center;
-      margin-bottom: 8rem;
-      background: rgba(15, 20, 30, 0.4);
+      margin-bottom: 5rem;
+      background: rgba(15, 20, 30, 0.5);
       border: 1px solid var(--glass-border);
-      padding: 4rem;
+      padding: 2rem;
       clip-path: var(--card-clip);
     }
 
     .about-img-box {
       width: 100%;
-      height: 400px;
-      position: relative;
+      height: 300px;
     }
 
     .about-img {
@@ -217,52 +220,52 @@
 
     .about-text h2 {
       font-family: var(--font-title);
-      font-size: 2.2rem;
-      margin-bottom: 1.5rem;
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
       text-transform: uppercase;
     }
 
     .about-text p {
       color: #909bb0;
-      line-height: 1.7;
-      margin-bottom: 1.5rem;
-      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
     }
 
-    /* SZALONE KARTY I GALERIA */
+    /* KARTY I GALERIA */
     .wild-card {
       background: rgba(15, 20, 30, 0.7);
       border: 1px solid var(--glass-border);
-      padding: 2.5rem;
+      padding: 1.8rem;
       clip-path: var(--card-clip);
       backdrop-filter: blur(15px);
     }
 
     .grid-3 {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 2.5rem;
-      margin-top: 3rem;
-      margin-bottom: 6rem;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+      margin-bottom: 4rem;
     }
 
     .card-item {
       background: rgba(255, 255, 255, 0.02);
       border: 1px solid var(--glass-border);
-      padding: 1.8rem;
+      padding: 1.5rem;
     }
 
     .card-item:hover {
       border-color: var(--accent-neon);
-      transform: translateY(-8px);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.7);
     }
 
     .card-img {
       width: 100%;
-      height: 320px;
+      height: 260px;
       object-fit: cover;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.2rem;
       filter: grayscale(40%);
     }
 
@@ -272,37 +275,69 @@
 
     .card-title {
       font-family: var(--font-title);
-      font-size: 1.4rem;
-      margin-bottom: 0.5rem;
+      font-size: 1.25rem;
+      margin-bottom: 0.4rem;
     }
 
     .card-desc {
       color: #8b95a5;
-      font-size: 0.9rem;
-      margin-bottom: 1.5rem;
+      font-size: 0.85rem;
+      margin-bottom: 1.2rem;
     }
 
     .price-tag {
       font-family: var(--font-title);
-      font-size: 2rem;
+      font-size: 1.6rem;
       color: var(--accent-neon);
       margin-bottom: 1rem;
       font-weight: 800;
     }
 
     footer {
-      margin-top: 8rem;
-      padding: 3rem;
+      margin-top: 5rem;
+      padding: 2.5rem 1rem;
       border-top: 1px solid var(--glass-border);
       text-align: center;
       color: #606b7d;
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       letter-spacing: 2px;
     }
 
-    @media (max-width: 900px) {
-      .hero, .about-section { grid-template-columns: 1fr; padding: 2rem; }
-      header { padding: 1rem 1.5rem; }
+    /* ULTRA-RESPONSYWNOŚĆ DLA MAŁYCH TELEFONÓW */
+    @media (max-width: 768px) {
+      header {
+        padding: 0.8rem 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.6rem;
+      }
+      .brand {
+        font-size: 1.2rem;
+      }
+      .switcher-box {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+      }
+      .tab-btn {
+        flex: 1;
+        text-align: center;
+        padding: 0.5rem;
+      }
+      main {
+        padding-top: 9.5rem;
+      }
+      .hero, .about-section {
+        grid-template-columns: 1fr;
+        padding: 1.2rem;
+        gap: 1.5rem;
+      }
+      .about-img-box {
+        height: 220px;
+      }
+      .hero-title {
+        font-size: 2.2rem;
+      }
     }
   </style>
 </head>
@@ -334,9 +369,9 @@
         </div>
 
         <div class="wild-card">
-          <h3 style="font-family: var(--font-title); font-size: 1.5rem; margin-bottom: 1rem;">Standardy Studio</h3>
-          <p style="color: #8b95a5; margin-bottom: 1.5rem;">Praca w trybie VIP (jeden klient dziennie). Indywidualne projekty bez powielania wzorów.</p>
-          <div style="border-left: 2px solid var(--accent-neon); padding-left: 1rem; font-weight: 700;">
+          <h3 style="font-family: var(--font-title); font-size: 1.3rem; margin-bottom: 0.8rem;">Standardy Studio</h3>
+          <p style="color: #8b95a5; margin-bottom: 1.2rem; font-size: 0.9rem;">Praca w trybie VIP (jeden klient dziennie). Indywidualne projekty bez powielania wzorów.</p>
+          <div style="border-left: 2px solid var(--accent-neon); padding-left: 0.8rem; font-weight: 700; font-size: 0.85rem;">
             100% AUTORSKIE PROJEKTY
           </div>
         </div>
@@ -351,11 +386,11 @@
           <h2>Kim jestem?</h2>
           <p>Tworzę na styku mrocznej estetyki, anatomii i nowoczesnej precyzji linii. Moje podejście do tatuażu wykracza poza rzemiosło – to proces transformacji i świadomego naznaczania ciała unikalną formą.</p>
           <p>Każdy projekt powstaje w kameralnych warunkach, z pełnym skupieniem na Twojej wizji oraz anatomicznej budowie ciała. Nie kopiuję klisz – tworzę dzieła szyte na miarę Twojej skóry.</p>
-          <a href="https://instagram.com" target="_blank" class="action-link" style="margin-top: 1rem;">Poznaj mój profil ↗</a>
+          <a href="https://instagram.com" target="_blank" class="action-link" style="margin-top: 0.5rem;">Poznaj mój profil ↗</a>
         </div>
       </section>
 
-      <h2 style="font-family: var(--font-title); font-size: 2rem; margin-bottom: 2rem;">Przykładowe Projekty & Cennik</h2>
+      <h2 style="font-family: var(--font-title); font-size: 1.6rem; margin-bottom: 1.5rem;">Przykładowe Projekty & Cennik</h2>
       
       <div class="grid-3">
         <div class="card-item">
@@ -363,7 +398,7 @@
           <h3 class="card-title">Fine-Line / Micro</h3>
           <p class="card-desc">Drobne kompozycje precyzyjne o wysokiej szczegółowości.</p>
           <div class="price-tag">od 500 PLN</div>
-          <a href="https://instagram.com" target="_blank" class="action-link" style="width: 100%; text-align: center;">Rezerwuj</a>
+          <a href="https://instagram.com" target="_blank" class="action-link" style="width: 100%; text-align: center; display: block;">Rezerwuj</a>
         </div>
 
         <div class="card-item">
@@ -371,15 +406,15 @@
           <h3 class="card-title">Full Day Session</h3>
           <p class="card-desc">Całodniowa sesja autorska (6-8 godzin intensywnej pracy).</p>
           <div class="price-tag">2200 PLN</div>
-          <a href="https://instagram.com" target="_blank" class="action-link" style="width: 100%; text-align: center;">Rezerwuj</a>
+          <a href="https://instagram.com" target="_blank" class="action-link" style="width: 100%; text-align: center; display: block;">Rezerwuj</a>
         </div>
 
         <div class="card-item">
           <img src="https://images.unsplash.com/photo-1611501275019-9b5cda994e8d?auto=format&fit=crop&w=600&q=80" alt="Sleeve" class="card-img">
           <h3 class="card-title">Projekt Duży / Rękaw</h3>
           <p class="card-desc">Wielosesyjne kompozycje anatomiczne (plecy, rękawy).</p>
-          <div class="price-tag">Wycena Indywidualna</div>
-          <a href="https://instagram.com" target="_blank" class="action-link" style="width: 100%; text-align: center;">Konsultacja</a>
+          <div class="price-tag" style="font-size: 1.2rem;">Wycena Indywidualna</div>
+          <a href="https://instagram.com" target="_blank" class="action-link" style="width: 100%; text-align: center; display: block;">Konsultacja</a>
         </div>
       </div>
     </div>
@@ -394,9 +429,9 @@
         </div>
 
         <div class="wild-card">
-          <h3 style="font-family: var(--font-title); font-size: 1.5rem; margin-bottom: 1rem;">Dla Kolekcjonerów</h3>
-          <p style="color: #8b95a5; margin-bottom: 1.5rem;">Dzieła dostępne do prywatnych wnętrz oraz jako wielkoformatowe instalacje do przestrzeni ekskluzywnych.</p>
-          <div style="border-left: 2px solid var(--accent-neon); padding-left: 1rem; font-weight: 700;">
+          <h3 style="font-family: var(--font-title); font-size: 1.3rem; margin-bottom: 0.8rem;">Dla Kolekcjonerów</h3>
+          <p style="color: #8b95a5; margin-bottom: 1.2rem; font-size: 0.9rem;">Dzieła dostępne do prywatnych wnętrz oraz jako wielkoformatowe instalacje do przestrzeni ekskluzywnych.</p>
+          <div style="border-left: 2px solid var(--accent-neon); padding-left: 0.8rem; font-weight: 700; font-size: 0.85rem;">
             CERTYFIKAT AUTENTYCZNOŚCI
           </div>
         </div>
@@ -411,32 +446,32 @@
           <h2>Filozofia Twórczości Płóciennej</h2>
           <p>Moje malarstwo to eksploracja materii, struktury i światła. Wykorzystuję tradycyjne techniki olejne i akrylowe, łącząc je z surowym lnem, płatkami złota oraz masami mineralnymi, co nadaje pracom głębię trójwymiaru.</p>
           <p>Każdy obraz powstaje powoli, warstwa po warstwie, stając się unikalnym nośnikiem emocji. Moje płótna znajdują dom w prywatnych kolekcjach w kraju i zagranicą.</p>
-          <a href="https://vinted.pl" target="_blank" class="action-link" style="margin-top: 1rem;">Zobacz dostępne prace ↗</a>
+          <a href="https://vinted.pl" target="_blank" class="action-link" style="margin-top: 0.5rem;">Zobacz dostępne prace ↗</a>
         </div>
       </section>
 
-      <h2 style="font-family: var(--font-title); font-size: 2rem; margin-bottom: 2rem;">Galeria Dzieł Sztuki & Przykładowe Projekty</h2>
+      <h2 style="font-family: var(--font-title); font-size: 1.6rem; margin-bottom: 1.5rem;">Galeria Dzieł Sztuki & Przykładowe Projekty</h2>
 
       <div class="grid-3">
         <div class="card-item">
           <img src="https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=600&q=80" alt="Canvas" class="card-img">
           <h3 class="card-title">Eteryczny Horyzont</h3>
           <p class="card-desc">Akryl & Złoto 24K | 120 x 90 cm (Dostępne)</p>
-          <a href="https://vinted.pl" target="_blank" class="action-link" style="width: 100%; text-align: center;">Kup na Vinted ↗</a>
+          <a href="https://vinted.pl" target="_blank" class="action-link" style="width: 100%; text-align: center; display: block;">Kup na Vinted ↗</a>
         </div>
 
         <div class="card-item">
           <img src="https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&w=600&q=80" alt="Texture" class="card-img">
           <h3 class="card-title">Materia & Czas</h3>
           <p class="card-desc">Olej & Struktura Mineralna | 80 x 80 cm (Kolekcja prywatna)</p>
-          <a href="https://vinted.pl" target="_blank" class="action-link" style="width: 100%; text-align: center;">Kup na Vinted ↗</a>
+          <a href="https://vinted.pl" target="_blank" class="action-link" style="width: 100%; text-align: center; display: block;">Kup na Vinted ↗</a>
         </div>
 
         <div class="card-item">
           <img src="https://images.unsplash.com/photo-1578926375705-90ae3353f50a?auto=format&fit=crop&w=600&q=80" alt="Oil Painting" class="card-img">
           <h3 class="card-title">Nocny Nokturn</h3>
           <p class="card-desc">Olej na surowym lnie | 140 x 100 cm (Archiwum projektów)</p>
-          <a href="https://vinted.pl" target="_blank" class="action-link" style="width: 100%; text-align: center;">Kup na Vinted ↗</a>
+          <a href="https://vinted.pl" target="_blank" class="action-link" style="width: 100%; text-align: center; display: block;">Kup na Vinted ↗</a>
         </div>
       </div>
     </div>
